@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Ejercicio7</string>
+    <string name="Guerrero">Guerrero</string>
+    <string name="Mago">Mago</string>
+    <string name="Arquero">Arquero</string>
+    <string name="Ladron">Ladron</string>
+    <string name="Aceptar">Aceptar</string>
+</resources>
