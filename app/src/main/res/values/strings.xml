@@ -5,4 +5,8 @@
     <string name="Arquero">Arquero</string>
     <string name="Ladron">Ladron</string>
     <string name="Aceptar">Aceptar</string>
+    <string name="Orco">Orco</string>
+    <string name="Elfo">Elfo</string>
+    <string name="Humano">Humano</string>
+    <string name="Enano">Enano</string>
 </resources>
