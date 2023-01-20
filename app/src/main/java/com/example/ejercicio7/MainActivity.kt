@@ -37,7 +37,10 @@ class MainActivity : AppCompatActivity() {
         binding.Aceptar.setOnClickListener {
             //cambiar de activity
             val intent = Intent(this@MainActivity, MainActivity2::class.java)
+            intent.putExtra("Personaje", Personaje.clase)
             startActivity(intent)
         }
     }
 }
+
+
