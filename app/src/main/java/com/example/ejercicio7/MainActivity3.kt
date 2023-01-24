@@ -10,6 +10,12 @@ class MainActivity3 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMain3Binding.inflate(layoutInflater)
         setContentView(binding.root)
+        var Personaje = Personaje()
+        Personaje = Personaje.inicializacion(Personaje)
+        Personaje.clase = intent.getStringExtra("CLASE").toString()
+        Personaje.raza = intent.getStringExtra("RAZA").toString()
+
+
 
     }
 }

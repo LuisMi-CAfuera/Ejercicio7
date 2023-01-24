@@ -89,4 +89,66 @@ class Personaje{
         return personaje
     }
 
+    fun inicializacion(p : Personaje): Personaje{
+
+        when(p.raza){
+
+            "Elfo" ->{
+                p.sabiduria = 7
+                p.destreza = 7
+                p.inteligencia = 7
+            }
+            "Humano" ->{
+                p.fuerza = 5
+                p.destreza = 5
+                p.constitucion = 5
+                p.inteligencia = 5
+            }
+            "Enano" ->{
+                p.fuerza = 10
+                p.constitucion=10
+                p.destreza=10
+            }
+            "Orco" ->{
+                p.destreza = 8
+                p.fuerza = 8
+                p.carisma = 8
+            }
+
+
+        }
+
+
+        //Inicializamos las habilidades de los personajes, ya que como solo hay seis pues hasta que se cumpla
+        var cont = 0
+        for (i in 1..6){
+
+            var dados = arrayListOf<Int>()
+            var i = 0
+            while (i < 4) {
+                dados.add((1..6).random())
+                i++
+            }
+            dados.sortDescending()
+            dados.removeAt(0)
+
+            when(cont){
+                1 -> p.fuerza += dados.sum()
+                2 -> p.destreza += dados.sum()
+                3 -> p.constitucion += dados.sum()
+                4 -> p.inteligencia += dados.sum()
+                5 -> p.sabiduria += dados.sum()
+                6 -> p.carisma += dados.sum()
+            }
+
+
+        }
+
+        p.vida= 10 +(p.constitucion-10)/2
+
+
+
+        return p
+    }
+
 }
