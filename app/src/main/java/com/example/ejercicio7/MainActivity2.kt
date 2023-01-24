@@ -12,30 +12,33 @@ class MainActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)
-        var Personaje = Personaje()
+        var raza = ""
+        var clase = intent.getStringExtra("CLASE").toString()
+
 
 
 
         binding.Orco.setOnClickListener{
             binding.imageView.setImageResource(R.drawable.orco)
-            Personaje.raza = "Orco"
+            raza = "Orco"
         }
         binding.Elfo.setOnClickListener{
             binding.imageView.setImageResource(R.drawable.elfo)
-            Personaje.raza = "Elfo"
+            raza = "Elfo"
         }
         binding.Humano.setOnClickListener{
             binding.imageView.setImageResource(R.drawable.humano)
-            Personaje.raza = "Humano"
+            raza = "Humano"
         }
         binding.Enano.setOnClickListener{
             binding.imageView.setImageResource(R.drawable.enano)
-            Personaje.raza = "Enano"
+            raza = "Enano"
         }
 
             binding.Aceptar.setOnClickListener{
             val intent = Intent(this@MainActivity2, MainActivity3::class.java)
-            intent.putExtra("RAZA", Personaje.raza)
+            intent.putExtra("RAZA", raza)
+            intent.putExtra("CLASE", clase)
             startActivity(intent)
             }
 

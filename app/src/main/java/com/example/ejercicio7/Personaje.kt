@@ -8,6 +8,7 @@ class Personaje{
     var clase: String=""
     var fuerza : Int=0
     var destreza : Int=0
+    var defensa : Int=0
     var inteligencia : Int=0
     var constitucion : Int=0
     var sabiduria : Int=0
@@ -17,7 +18,7 @@ class Personaje{
 
 
     constructor()
-    constructor(nombre: String, pesoMochila: Int, estadoVital: String, raza: String, clase: String, fuerza: Int, destreza: Int, inteligencia: Int, constitucion: Int, sabiduria: Int, carisma: Int, vida: Int, contvic: Int) {
+    constructor(nombre: String, pesoMochila: Int, estadoVital: String, raza: String, clase: String, fuerza: Int, destreza: Int,defensa : Int, inteligencia: Int, constitucion: Int, sabiduria: Int, carisma: Int, vida: Int, contvic: Int) {
         this.nombre = nombre
         this.pesoMochila = pesoMochila
         this.estadoVital = estadoVital
@@ -25,6 +26,7 @@ class Personaje{
         this.clase = clase
         this.fuerza = fuerza
         this.destreza = destreza
+        this.defensa = defensa
         this.inteligencia = inteligencia
         this.constitucion = constitucion
         this.sabiduria = sabiduria

@@ -9,4 +9,8 @@
     <string name="Elfo">Elfo</string>
     <string name="Humano">Humano</string>
     <string name="Enano">Enano</string>
+    <string name="Seguir">Seguir</string>
+    <string name="Volver">Volver a Empezar</string>
+    <string name="Nombre">Nombre</string>
+    <string name="Todo">Todo</string>
 </resources>
