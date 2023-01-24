@@ -8,12 +8,11 @@ import com.example.ejercicio7.databinding.ActivityMain2Binding
 
 class MainActivity2 : AppCompatActivity() {
     private lateinit var binding: ActivityMain2Binding
-    private lateinit var Personaje: Personaje
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)
-        Personaje.clase = intent.getStringExtra("Personaje").toString()
+        var Personaje = Personaje()
 
 
 
@@ -38,7 +37,7 @@ class MainActivity2 : AppCompatActivity() {
             val intent = Intent(this@MainActivity2, MainActivity3::class.java)
             intent.putExtra("Personaje", Personaje.raza)
             startActivity(intent)
-        }
+            }
 
     }
 }
