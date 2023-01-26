@@ -13,4 +13,11 @@
     <string name="Volver">Volver a Empezar</string>
     <string name="Nombre">Nombre</string>
     <string name="Todo">Todo</string>
+    <string name="todo">TODO</string>
+    <string name="Dado">Dado</string>
+    <string name="Expli">
+        Comienza la aventura,
+        pulsa el DADO para avanzar.
+        CUIDADO puedes encontrarte enemigos
+    </string>
 </resources>

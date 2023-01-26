@@ -10,6 +10,16 @@ class Ejercicio10 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMain4Binding.inflate(layoutInflater)
         setContentView(binding.root)
+        var Personaje : Personaje = Personaje()
+        Personaje.clase = intent.getStringExtra("CLASE").toString()
+        Personaje.raza = intent.getStringExtra("RAZA").toString()
+        Personaje.nombre = intent.getStringExtra("NOMBRE").toString()
+        Personaje.pesoMochila = intent.getIntExtra("MOCH",0)
+        Personaje.vida = intent.getIntExtra("VIDA",0)
+        Personaje.fuerza = intent.getIntExtra("FUE",0)
+        Personaje.defensa = intent.getIntExtra("DEF",0)
+
+
 
 
     }
