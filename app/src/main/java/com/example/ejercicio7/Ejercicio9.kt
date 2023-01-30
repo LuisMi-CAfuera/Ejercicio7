@@ -78,7 +78,7 @@ class Ejercicio9 : AppCompatActivity() {
 
 
         binding.Volver.setOnClickListener{
-            val intent = Intent(this@Ejercicio9, Ejercicio7::class.java)
+            val intent = Intent(this@Ejercicio9, MainActivity::class.java)
             startActivity(intent)
         }
 

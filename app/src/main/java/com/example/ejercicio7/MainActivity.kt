@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.ejercicio7.databinding.ActivityMainBinding
 
-class Ejercicio7 : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +37,7 @@ class Ejercicio7 : AppCompatActivity() {
 
         binding.Aceptar.setOnClickListener {
             //cambiar de activity
-            val intent = Intent(this@Ejercicio7, Ejercicio8::class.java)
+            val intent = Intent(this@MainActivity, Ejercicio8::class.java)
             intent.putExtra("CLASE", clase)
             startActivity(intent)
         }
