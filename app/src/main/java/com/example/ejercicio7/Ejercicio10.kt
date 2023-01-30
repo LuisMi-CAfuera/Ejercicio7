@@ -31,8 +31,6 @@ class Ejercicio10 : AppCompatActivity() {
 
 
 
-
-
     }
 
     @SuppressLint("SetTextI18n", "SuspiciousIndentation")
