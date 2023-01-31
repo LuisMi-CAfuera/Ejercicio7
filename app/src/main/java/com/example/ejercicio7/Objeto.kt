@@ -13,10 +13,10 @@ class Objeto : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityObjetoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        var p= Personaje()
+        val p= Personaje()
         p.pesoMochila= intent.getIntExtra("Moch", 0)
         //Un objeto objetos inicializado con el peso y el valor y la vida
-        var objeto = Objetos((1..5).random(), (1..10).random(), (1..20).random())
+        val objeto = Objetos((1..5).random(), (1..10).random(), (1..20).random())
 
 
 
@@ -32,12 +32,12 @@ class Objeto : AppCompatActivity() {
 
 
         binding.Volver.setOnClickListener{
-            var intent = Intent(this@Objeto, Ejercicio10::class.java)
+            val intent = Intent(this@Objeto, Ejercicio10::class.java)
             startActivity(intent)
         }
 
         binding.Recoger.setOnClickListener{
-            var intent = Intent(this@Objeto, Ejercicio10::class.java)
+            val intent = Intent(this@Objeto, Ejercicio10::class.java)
             intent.putExtra("MOCH", p.pesoMochila-objeto.peso)
             startActivity(intent)
         }
