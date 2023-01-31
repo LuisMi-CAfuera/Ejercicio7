@@ -13,7 +13,7 @@ class Ejercicio10 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMain4Binding.inflate(layoutInflater)
         setContentView(binding.root)
-        var Personaje : Personaje = Personaje()
+        val Personaje : Personaje = Personaje()
         Personaje.clase = intent.getStringExtra("CLASE").toString()
         Personaje.raza = intent.getStringExtra("RAZA").toString()
         Personaje.nombre = intent.getStringExtra("NOMBRE").toString()
@@ -26,7 +26,7 @@ class Ejercicio10 : AppCompatActivity() {
 
 
         binding.Dado.setOnClickListener{
-            aleatorio()
+            aleatorio(Personaje)
         }
 
 
@@ -34,7 +34,7 @@ class Ejercicio10 : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n", "SuspiciousIndentation")
-    fun aleatorio(){
+    fun aleatorio(Personaje: Personaje){
       var intent : Intent
 
       val aleatorio = (1..4).random()
@@ -48,6 +48,8 @@ class Ejercicio10 : AppCompatActivity() {
                 binding.BotonC.text = "Ir a Objeto"
                 binding.BotonC.setOnClickListener {
                     intent = Intent(this@Ejercicio10, Objeto::class.java)
+                    intent.putExtra("Moch", Personaje.pesoMochila)
+
                     startActivity(intent)
                 }
             }
@@ -83,4 +85,10 @@ class Ejercicio10 : AppCompatActivity() {
             }
         }
     }
+
+
 }
+
+
+
+

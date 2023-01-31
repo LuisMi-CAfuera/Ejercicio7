@@ -17,6 +17,7 @@ class Personaje{
     var contvic : Int=0
 
 
+
     constructor()
     constructor(nombre: String, pesoMochila: Int, estadoVital: String, raza: String, clase: String, fuerza: Int, destreza: Int,defensa : Int, inteligencia: Int, constitucion: Int, sabiduria: Int, carisma: Int, vida: Int, contvic: Int) {
         this.nombre = nombre
