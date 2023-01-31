@@ -21,7 +21,10 @@ class Mercader : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.Volver
+        binding.Volver.setOnClickListener{
+            var intent = Intent(this@Mercader, Ejercicio10::class.java)
+            startActivity(intent)
+        }
 
     }
 }

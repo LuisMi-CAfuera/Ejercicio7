@@ -7,7 +7,7 @@
     tools:context=".Objeto">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/Objeto"
         android:layout_width="210dp"
         android:layout_height="204dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,15 +19,15 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
-        android:id="@+id/Continuar"
+        android:id="@+id/Volver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/continuar"
+        android:text="@string/volver"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Recoger"
         app:layout_constraintHorizontal_bias="0.268"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/Objeto"
         app:layout_constraintVertical_bias="0.287" />
 
     <Button
@@ -37,7 +37,7 @@
         android:text="@string/recoger"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Continuar"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/Volver"
+        app:layout_constraintTop_toBottomOf="@+id/Objeto"
         app:layout_constraintVertical_bias="0.286" />
 </androidx.constraintlayout.widget.ConstraintLayout>
