@@ -20,4 +20,12 @@
         pulsa el DADO para avanzar.
         CUIDADO puedes encontrarte enemigos
     </string>
+    <string name="luchar">Luchar</string>
+    <string name="huir">Huir</string>
+    <string name="continuar">Continuar</string>
+    <string name="recoger">Recoger</string>
+    <string name="volver">Volver</string>
+    <string name="entrar_a_la_ciudad">Entrar A la Ciudad</string>
+    <string name="hablar">Hablar</string>
+    <string name="comerciar">Comerciar</string>
 </resources>

@@ -73,9 +73,9 @@ class Ejercicio10 : AppCompatActivity() {
             }
             4 ->{
                 //Ir a la activity Ladron
-                binding.Explicacion.text = "Ha salido ${aleatorio}, te has encontrado con un Ladron"
+                binding.Explicacion.text = "Ha salido ${aleatorio}, te has encontrado con un Enemigo"
                 binding.BotonC.visibility = View.VISIBLE
-                binding.BotonC.text = "Pelear con Ladron"
+                binding.BotonC.text = "Pelear con Enemigo"
                 binding.BotonC.setOnClickListener {
                     intent = Intent(this@Ejercicio10, Ladron::class.java)
                     startActivity(intent)
