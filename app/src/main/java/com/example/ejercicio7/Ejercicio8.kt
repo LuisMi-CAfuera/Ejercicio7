@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.ejercicio7.databinding.ActivityMain2Binding
+import com.google.gson.Gson
 
 
 class Ejercicio8 : AppCompatActivity() {
@@ -12,6 +13,10 @@ class Ejercicio8 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)
+        val mPrefs = getPreferences(MODE_PRIVATE)
+        val gson = Gson()
+        val json = mPrefs.getString("Personaje", "")
+        val p = gson.fromJson(json, Personaje::class.java)
 
 
 
