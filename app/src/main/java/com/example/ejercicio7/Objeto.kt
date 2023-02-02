@@ -25,7 +25,8 @@ class Objeto : AppCompatActivity() {
 
         binding.TextoObjeto.setText("Peso Maximo de la mochila: "+p.pesoMochila+"kg\n" +
                                     "Peso del objeto: "+objeto.peso +"kg\n"+
-                                    "Valor del objeto:"+objeto.valor+"€\n"+
+                                    "Valor del objeto: "+objeto.valor+"€\n"+
+                                    "Vida del objeto: "+objeto.vida+"\n"+
                                     "Si coges este objeto, tu mochila solo podra llevar:"+ (p.pesoMochila-objeto.peso)+"kg\n")
 
 
