@@ -9,6 +9,7 @@ import com.example.ejercicio7.databinding.ActivityMain4Binding
 
 class Ejercicio10 : AppCompatActivity() {
     private lateinit var binding: ActivityMain4Binding
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMain4Binding.inflate(layoutInflater)
@@ -17,11 +18,19 @@ class Ejercicio10 : AppCompatActivity() {
         Personaje.clase = intent.getStringExtra("CLASE").toString()
         Personaje.raza = intent.getStringExtra("RAZA").toString()
         Personaje.nombre = intent.getStringExtra("NOMBRE").toString()
-
+        Personaje.pesoMochila = intent.getIntExtra("MOCH",0)
         Personaje.vida = intent.getIntExtra("VIDA",0)
         Personaje.fuerza = intent.getIntExtra("FUE",0)
         Personaje.defensa = intent.getIntExtra("DEF",0)
         binding.Valle.setImageResource(R.drawable.valle)
+        binding.PesoMochila.isEnabled = false
+
+        if(Personaje.pesoMochila < 100){
+            binding.PesoMochila.text = "Mochila: ${Personaje.pesoMochila}/100"
+            binding.PesoMochila.isEnabled = true
+        }else{
+            binding.PesoMochila.isEnabled = false
+        }
 
 
 
