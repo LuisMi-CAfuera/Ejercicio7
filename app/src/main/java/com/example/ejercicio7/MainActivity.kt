@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.ejercicio7.databinding.ActivityMainBinding
+import com.google.gson.Gson
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -11,34 +12,40 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        var clase=""
+        val p = Personaje()
+        val mPrefs = getPreferences(MODE_PRIVATE)
+
 
 
 
         binding.Guerrero.setOnClickListener {
             binding.imagenes.setImageResource(R.drawable.guerrero2)
-            clase = "Guerrero"
+            p.clase = "Guerrero"
         }
 
         binding.Mago.setOnClickListener {
             binding.imagenes.setImageResource(R.drawable.mago)
-            clase = "Mago"
+            p.clase= "Mago"
         }
 
         binding.ladron.setOnClickListener {
             binding.imagenes.setImageResource(R.drawable.ladron)
-            clase = "Ladron"
+            p.clase = "Ladron"
         }
 
         binding.Arquero.setOnClickListener {
             binding.imagenes.setImageResource(R.drawable.arquero)
-            clase = "Arquero"
+            p.clase = "Arquero"
         }
 
         binding.Aceptar.setOnClickListener {
             //cambiar de activity
             val intent = Intent(this@MainActivity, Ejercicio8::class.java)
-            intent.putExtra("CLASE", clase)
+            val prefs = mPrefs.edit()
+            val gson = Gson()
+            val json = gson.toJson(p)
+            prefs.putString("Personaje", json)
+            prefs.apply()
             startActivity(intent)
         }
     }

@@ -2,14 +2,15 @@ package com.example.ejercicio7
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ejercicio7.databinding.ActivityMain4Binding
+import com.google.gson.Gson
 
 class Ejercicio10 : AppCompatActivity() {
     private lateinit var binding: ActivityMain4Binding
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "CommitPrefEdits")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMain4Binding.inflate(layoutInflater)
@@ -24,6 +25,14 @@ class Ejercicio10 : AppCompatActivity() {
         Personaje.defensa = intent.getIntExtra("DEF",0)
         binding.Valle.setImageResource(R.drawable.valle)
         binding.PesoMochila.isEnabled = false
+
+        val mPrefs = getPreferences(MODE_PRIVATE)
+
+        val prefs = mPrefs.edit()
+        val gson = Gson()
+        val json = gson.toJson(Personaje)
+        prefs.putString("Personaje", json)
+        prefs.apply()
 
         if(Personaje.pesoMochila < 100){
             binding.PesoMochila.text = "Mochila: ${Personaje.pesoMochila}/100"

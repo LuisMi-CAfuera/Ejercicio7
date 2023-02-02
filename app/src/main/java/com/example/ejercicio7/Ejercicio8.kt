@@ -12,8 +12,7 @@ class Ejercicio8 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)
-        var raza = ""
-        var clase = intent.getStringExtra("CLASE").toString()
+
 
 
 
