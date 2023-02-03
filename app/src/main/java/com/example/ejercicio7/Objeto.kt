@@ -23,7 +23,6 @@ class Objeto : AppCompatActivity() {
 
 
 
-
         binding.Objeto.setImageResource(R.drawable.objeto)
 
 
