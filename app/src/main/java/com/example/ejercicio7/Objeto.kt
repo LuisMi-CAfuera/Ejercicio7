@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.ejercicio7.databinding.ActivityObjetoBinding
+import com.google.gson.Gson
 
 class Objeto : AppCompatActivity() {
     private lateinit var binding: ActivityObjetoBinding
@@ -13,10 +14,14 @@ class Objeto : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityObjetoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val p= Personaje()
-        p.pesoMochila= intent.getIntExtra("Moch", 0)
+        val mPrefs = getPreferences(MODE_PRIVATE)
+        val gson = Gson()
+        val json = mPrefs.getString("Personaje", "")
+        val p = gson.fromJson(json, Personaje::class.java)
         //Un objeto objetos inicializado con el peso y el valor y la vida
         val objeto = Objetos((1..5).random(), (1..10).random(), (1..20).random())
+
+
 
 
 
@@ -32,14 +37,24 @@ class Objeto : AppCompatActivity() {
 
 
 
+
         binding.Volver.setOnClickListener{
             val intent = Intent(this@Objeto, Ejercicio10::class.java)
+            val prefs = mPrefs.edit()
+            val json2 = gson.toJson(p)
+            prefs.putString("Personaje", json)
+            prefs.apply()
             startActivity(intent)
         }
 
         binding.Recoger.setOnClickListener{
             val intent = Intent(this@Objeto, Ejercicio10::class.java)
-            intent.putExtra("MOCH", p.pesoMochila-objeto.peso)
+            p.pesoMochila -= objeto.peso
+            p.mochila.add(objeto)
+            val prefs = mPrefs.edit()
+            val json2 = gson.toJson(p)
+            prefs.putString("Personaje", json)
+            prefs.apply()
             startActivity(intent)
         }
 

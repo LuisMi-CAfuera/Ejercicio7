@@ -15,11 +15,13 @@ class Personaje{
     var carisma : Int=0
     var vida : Int=0
     var contvic : Int=0
+    //Que mochila sea un arraylist de objetos
+    var mochila : ArrayList<Objetos> = ArrayList()
 
 
 
     constructor()
-    constructor(nombre: String, pesoMochila: Int, estadoVital: String, raza: String, clase: String, fuerza: Int, destreza: Int,defensa : Int, inteligencia: Int, constitucion: Int, sabiduria: Int, carisma: Int, vida: Int, contvic: Int) {
+    constructor(nombre: String, pesoMochila: Int, estadoVital: String, raza: String, clase: String, fuerza: Int, destreza: Int,defensa : Int, inteligencia: Int, constitucion: Int, sabiduria: Int, carisma: Int, vida: Int, contvic: Int, mochila: ArrayList<Objetos>) {
         this.nombre = nombre
         this.pesoMochila = pesoMochila
         this.estadoVital = estadoVital
@@ -34,6 +36,7 @@ class Personaje{
         this.carisma = carisma
         this.vida = vida
         this.contvic = contvic
+        this.mochila = mochila
     }
 
     //Funcion que me diga que raza es aleatoriamente

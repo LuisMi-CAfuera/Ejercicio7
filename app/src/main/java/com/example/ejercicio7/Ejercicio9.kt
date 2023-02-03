@@ -4,7 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import com.example.ejercicio7.databinding.ActivityMain3Binding
+import com.google.gson.Gson
 
 class Ejercicio9 : AppCompatActivity() {
     private lateinit var binding: ActivityMain3Binding
@@ -14,66 +17,76 @@ class Ejercicio9 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMain3Binding.inflate(layoutInflater)
         setContentView(binding.root)
-        val Personaje = Personaje()
-        Personaje.clase = intent.getStringExtra("CLASE").toString()
-        Personaje.raza = intent.getStringExtra("RAZA").toString()
-        Personaje.vida = 200
-        Personaje.pesoMochila = 100
-        Personaje.fuerza = (10..15).random()
-        Personaje.defensa = (1..5).random()
+        val mPrefs = getPreferences(MODE_PRIVATE)
+        val gson = Gson()
+        val json = mPrefs.getString("Personaje", "")
+        val p = gson.fromJson(json, Personaje::class.java)
+        p.vida = 200
+        p.pesoMochila = 100
+        p.fuerza = (10..15).random()
+        p.defensa = (1..5).random()
 
 
-        when(Personaje.clase){
+        when(p.clase){
 
             "Guerrero" ->{
-                binding.clase.text = "Clase: ${Personaje.clase}"
+                binding.clase.text = "Clase: ${p.clase}"
                 binding.Clase.setImageResource(R.drawable.guerrero2)
             }
             "Mago" ->{
-                binding.clase.text = "Clase: ${Personaje.clase}"
+                binding.clase.text = "Clase: ${p.clase}"
                 binding.Clase.setImageResource(R.drawable.mago)
             }
             "Ladron" ->{
-                binding.clase.text = "Clase: ${Personaje.clase}"
+                binding.clase.text = "Clase: ${p.clase}"
                 binding.Clase.setImageResource(R.drawable.ladron)
             }
             "Arquero" ->{
-                binding.clase.text = "Clase: ${Personaje.clase}"
+                binding.clase.text = "Clase: ${p.clase}"
                 binding.Clase.setImageResource(R.drawable.arquero)
             }
         }
 
 
 
-        when(Personaje.raza){
+        when(p.raza){
 
             "Orco" ->{
-                binding.raza.text = "Raza: ${Personaje.raza}"
+                binding.raza.text = "Raza: ${p.raza}"
                 binding.Raza.setImageResource(R.drawable.orco)
 
             }
             "Elfo" ->{
-                binding.raza.text = "Raza: ${Personaje.raza}"
+                binding.raza.text = "Raza: ${p.raza}"
                 binding.Raza.setImageResource(R.drawable.elfo)
 
             }
             "Humano" ->{
-                binding.raza.text = "Raza: ${Personaje.raza}"
+                binding.raza.text = "Raza: ${p.raza}"
                 binding.Raza.setImageResource(R.drawable.humano)
 
             }
             "Enano" ->{
-                binding.raza.text = "Raza: ${Personaje.raza}"
+                binding.raza.text = "Raza: ${p.raza}"
                 binding.Raza.setImageResource(R.drawable.enano)
 
             }
         }
-        Personaje.nombre = binding.Nombre.toString()
+        binding.Nombre.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                p.nombre = binding.Nombre.toString()
+            }
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
 
-        binding.Fuerza.text = "Fuerza: ${Personaje.fuerza}"
-        binding.Defensa.text = "Defensa: ${Personaje.defensa}"
-        binding.Mochila.text= "Peso Mochila: ${Personaje.pesoMochila}"
-        binding.Vida.text = "Vida: ${Personaje.vida}"
+
+        binding.Fuerza.text = "Fuerza: ${p.fuerza}"
+        binding.Defensa.text = "Defensa: ${p.defensa}"
+        binding.Mochila.text= "Peso Mochila: ${p.pesoMochila}"
+        binding.Vida.text = "Vida: ${p.vida}"
         binding.Monedero.text = "Monedero: 0$"
 
 
@@ -84,13 +97,10 @@ class Ejercicio9 : AppCompatActivity() {
 
         binding.Seguir.setOnClickListener{
             val intent2 = Intent(this@Ejercicio9, Ejercicio10::class.java)
-            intent2.putExtra("CLASE", Personaje.clase)
-            intent2.putExtra("RAZA", Personaje.raza)
-            intent2.putExtra("FUE", Personaje.fuerza)
-            intent2.putExtra("DEF", Personaje.defensa)
-            intent2.putExtra("MOCH", Personaje.pesoMochila)
-            intent2.putExtra("VIDA", Personaje.vida)
-            intent2.putExtra("NOMBRE", Personaje.nombre)
+            val prefs = mPrefs.edit()
+            val json = gson.toJson(p)
+            prefs.putString("Personaje", json)
+            prefs.apply()
             startActivity(intent2)
         }
 

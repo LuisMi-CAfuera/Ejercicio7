@@ -2,6 +2,7 @@ package com.example.ejercicio7
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -15,27 +16,18 @@ class Ejercicio10 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMain4Binding.inflate(layoutInflater)
         setContentView(binding.root)
-        val Personaje : Personaje = Personaje()
-        Personaje.clase = intent.getStringExtra("CLASE").toString()
-        Personaje.raza = intent.getStringExtra("RAZA").toString()
-        Personaje.nombre = intent.getStringExtra("NOMBRE").toString()
-        Personaje.pesoMochila = intent.getIntExtra("MOCH",0)
-        Personaje.vida = intent.getIntExtra("VIDA",0)
-        Personaje.fuerza = intent.getIntExtra("FUE",0)
-        Personaje.defensa = intent.getIntExtra("DEF",0)
+        val mPrefs = getPreferences(MODE_PRIVATE)
+        val gson = Gson()
+        val json = mPrefs.getString("Personaje", "")
+        val p = gson.fromJson(json, Personaje::class.java)
         binding.Valle.setImageResource(R.drawable.valle)
         binding.PesoMochila.isEnabled = false
 
-        val mPrefs = getPreferences(MODE_PRIVATE)
 
-        val prefs = mPrefs.edit()
-        val gson = Gson()
-        val json = gson.toJson(Personaje)
-        prefs.putString("Personaje", json)
-        prefs.apply()
 
-        if(Personaje.pesoMochila < 100){
-            binding.PesoMochila.text = "Mochila: ${Personaje.pesoMochila}/100"
+
+        if(p.pesoMochila < 100){
+            binding.PesoMochila.text = "Mochila: ${p.pesoMochila}/100"
             binding.PesoMochila.isEnabled = true
         }else{
             binding.PesoMochila.isEnabled = false
@@ -44,7 +36,7 @@ class Ejercicio10 : AppCompatActivity() {
 
 
         binding.Dado.setOnClickListener{
-            aleatorio(Personaje)
+            aleatorio(p,mPrefs)
         }
 
 
@@ -52,10 +44,15 @@ class Ejercicio10 : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n", "SuspiciousIndentation")
-    fun aleatorio(Personaje: Personaje){
-      var intent : Intent
+    fun aleatorio(Personaje: Personaje, mPrefs: SharedPreferences){
+        var intent : Intent
 
-      val aleatorio = (1..4).random()
+        val aleatorio = (1..4).random()
+        val prefs = mPrefs.edit()
+        val gson = Gson()
+        val json = gson.toJson(Personaje)
+        prefs.putString("Personaje", json)
+        prefs.apply()
 
         when(aleatorio){
 
@@ -66,8 +63,6 @@ class Ejercicio10 : AppCompatActivity() {
                 binding.BotonC.text = "Ir a Objeto"
                 binding.BotonC.setOnClickListener {
                     intent = Intent(this@Ejercicio10, Objeto::class.java)
-                    intent.putExtra("Moch", Personaje.pesoMochila)
-
                     startActivity(intent)
                 }
             }

@@ -16,6 +16,8 @@ class Mercader : AppCompatActivity() {
         binding.Mercader.setImageResource(R.drawable.mercader)
 
 
+
+
         binding.Comerciar.setOnClickListener{
             var intent = Intent(this@Mercader, Comerciar::class.java)
             startActivity(intent)

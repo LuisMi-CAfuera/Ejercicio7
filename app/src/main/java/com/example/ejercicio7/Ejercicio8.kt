@@ -24,27 +24,29 @@ class Ejercicio8 : AppCompatActivity() {
 
         binding.Orco.setOnClickListener{
             binding.imageView.setImageResource(R.drawable.orco)
-            raza = "Orco"
+            p.raza = "Orco"
         }
         binding.Elfo.setOnClickListener{
             binding.imageView.setImageResource(R.drawable.elfo)
-            raza = "Elfo"
+            p.raza = "Elfo"
         }
         binding.Humano.setOnClickListener{
             binding.imageView.setImageResource(R.drawable.humano)
-            raza = "Humano"
+            p.raza = "Humano"
         }
         binding.Enano.setOnClickListener{
             binding.imageView.setImageResource(R.drawable.enano)
-            raza = "Enano"
+            p.raza = "Enano"
         }
 
-            binding.Aceptar.setOnClickListener{
+        binding.Aceptar.setOnClickListener{
             val intent = Intent(this@Ejercicio8, Ejercicio9::class.java)
-            intent.putExtra("RAZA", raza)
-            intent.putExtra("CLASE", clase)
+            val prefs = mPrefs.edit()
+            val json = gson.toJson(p)
+            prefs.putString("Personaje", json)
+            prefs.apply()
             startActivity(intent)
-            }
+        }
 
     }
 }
