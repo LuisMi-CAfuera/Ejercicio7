@@ -17,9 +17,8 @@ class Ejercicio9 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMain3Binding.inflate(layoutInflater)
         setContentView(binding.root)
-        val mPrefs = getPreferences(MODE_PRIVATE)
         val gson = Gson()
-        val json = mPrefs.getString("Personaje", "")
+        val json = intent.getStringExtra("Personaje")
         val p = gson.fromJson(json, Personaje::class.java)
         p.vida = 200
         p.pesoMochila = 100
@@ -97,10 +96,8 @@ class Ejercicio9 : AppCompatActivity() {
 
         binding.Seguir.setOnClickListener{
             val intent2 = Intent(this@Ejercicio9, Ejercicio10::class.java)
-            val prefs = mPrefs.edit()
-            val json = gson.toJson(p)
-            prefs.putString("Personaje", json)
-            prefs.apply()
+            val json2 = gson.toJson(p)
+            intent2.putExtra("Personaje", json2)
             startActivity(intent2)
         }
 

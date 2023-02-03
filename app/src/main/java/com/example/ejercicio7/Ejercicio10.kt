@@ -16,13 +16,11 @@ class Ejercicio10 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMain4Binding.inflate(layoutInflater)
         setContentView(binding.root)
-        val mPrefs = getPreferences(MODE_PRIVATE)
         val gson = Gson()
-        val json = mPrefs.getString("Personaje", "")
+        val json = intent.getStringExtra("Personaje")
         val p = gson.fromJson(json, Personaje::class.java)
         binding.Valle.setImageResource(R.drawable.valle)
         binding.PesoMochila.isEnabled = false
-
 
 
 
@@ -34,9 +32,8 @@ class Ejercicio10 : AppCompatActivity() {
         }
 
 
-
         binding.Dado.setOnClickListener{
-            aleatorio(p,mPrefs)
+            aleatorio(p)
         }
 
 
@@ -44,15 +41,13 @@ class Ejercicio10 : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n", "SuspiciousIndentation")
-    fun aleatorio(Personaje: Personaje, mPrefs: SharedPreferences){
+    fun aleatorio(Personaje: Personaje){
         var intent : Intent
 
         val aleatorio = (1..4).random()
-        val prefs = mPrefs.edit()
         val gson = Gson()
         val json = gson.toJson(Personaje)
-        prefs.putString("Personaje", json)
-        prefs.apply()
+
 
         when(aleatorio){
 
@@ -63,6 +58,7 @@ class Ejercicio10 : AppCompatActivity() {
                 binding.BotonC.text = "Ir a Objeto"
                 binding.BotonC.setOnClickListener {
                     intent = Intent(this@Ejercicio10, Objeto::class.java)
+                    intent.putExtra("Personaje", json)
                     startActivity(intent)
                 }
             }
@@ -73,6 +69,7 @@ class Ejercicio10 : AppCompatActivity() {
                 binding.BotonC.text = "Ir a Ciudad"
                 binding.BotonC.setOnClickListener {
                     intent = Intent(this@Ejercicio10, Ciudad::class.java)
+                    intent.putExtra("Personaje", json)
                     startActivity(intent)
                 }
             }
@@ -83,6 +80,7 @@ class Ejercicio10 : AppCompatActivity() {
                 binding.BotonC.text = "Hablar con Mercader"
                 binding.BotonC.setOnClickListener {
                     intent = Intent(this@Ejercicio10, Mercader::class.java)
+                    intent.putExtra("Personaje", json)
                     startActivity(intent)
                 }
             }
@@ -93,6 +91,7 @@ class Ejercicio10 : AppCompatActivity() {
                 binding.BotonC.text = "Pelear con Enemigo"
                 binding.BotonC.setOnClickListener {
                     intent = Intent(this@Ejercicio10, Ladron::class.java)
+                    intent.putExtra("Personaje", json)
                     startActivity(intent)
                 }
             }

@@ -12,25 +12,26 @@ class Ciudad : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCiudadBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val mPrefs = getPreferences(MODE_PRIVATE)
         val gson = Gson()
-        val json = mPrefs.getString("Personaje", "")
+        val json = intent.getStringExtra("Personaje")
         val p = gson.fromJson(json, Personaje::class.java)
 
         binding.ciudad.setImageResource(R.drawable.ciudad)
 
-        val prefs = mPrefs.edit()
-        val json2 = gson.toJson(p)
-        prefs.putString("Personaje", json)
-        prefs.apply()
+
+
 
         binding.Continuar.setOnClickListener{
             val intent = Intent(this@Ciudad, EntradaACiu::class.java)
+            val json2 = gson.toJson(p)
+            intent.putExtra("Personaje", json2)
             startActivity(intent)
         }
 
         binding.Volver.setOnClickListener{
             val intent = Intent(this@Ciudad, Ejercicio10::class.java)
+            val json2 = gson.toJson(p)
+            intent.putExtra("Personaje", json2)
             startActivity(intent)
         }
     }

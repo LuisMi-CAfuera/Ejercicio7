@@ -15,7 +15,6 @@ class Personaje{
     var carisma : Int=0
     var vida : Int=0
     var contvic : Int=0
-    //Que mochila sea un arraylist de objetos
     var mochila : ArrayList<Objetos> = ArrayList()
 
 
@@ -129,7 +128,7 @@ class Personaje{
         var cont = 0
         for (i in 1..6){
 
-            var dados = arrayListOf<Int>()
+            val dados = arrayListOf<Int>()
             var i = 0
             while (i < 4) {
                 dados.add((1..6).random())
@@ -156,5 +155,15 @@ class Personaje{
 
         return p
     }
+
+    override fun toString(): String {
+        return "Personaje(nombre='$nombre', pesoMochila=$pesoMochila, " +
+                "estadoVital='$estadoVital', raza='$raza', clase='$clase', " +
+                "fuerza=$fuerza, destreza=$destreza, defensa=$defensa, " +
+                "inteligencia=$inteligencia, constitucion=$constitucion, " +
+                "sabiduria=$sabiduria, carisma=$carisma, vida=$vida, " +
+                "contvic=$contvic, mochila=$mochila)"
+    }
+
 
 }

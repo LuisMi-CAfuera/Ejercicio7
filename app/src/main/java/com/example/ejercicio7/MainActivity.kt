@@ -15,9 +15,6 @@ class MainActivity : AppCompatActivity() {
         val p = Personaje()
         val mPrefs = getPreferences(MODE_PRIVATE)
 
-
-
-
         binding.Guerrero.setOnClickListener {
             binding.imagenes.setImageResource(R.drawable.guerrero2)
             p.clase = "Guerrero"
@@ -26,26 +23,29 @@ class MainActivity : AppCompatActivity() {
         binding.Mago.setOnClickListener {
             binding.imagenes.setImageResource(R.drawable.mago)
             p.clase= "Mago"
+
         }
 
         binding.ladron.setOnClickListener {
             binding.imagenes.setImageResource(R.drawable.ladron)
             p.clase = "Ladron"
+
         }
 
         binding.Arquero.setOnClickListener {
             binding.imagenes.setImageResource(R.drawable.arquero)
             p.clase = "Arquero"
+
         }
 
         binding.Aceptar.setOnClickListener {
             //cambiar de activity
             val intent = Intent(this@MainActivity, Ejercicio8::class.java)
-            val prefs = mPrefs.edit()
             val gson = Gson()
             val json = gson.toJson(p)
-            prefs.putString("Personaje", json)
-            prefs.apply()
+            intent.putExtra("Personaje", json)
+
+
             startActivity(intent)
         }
     }
