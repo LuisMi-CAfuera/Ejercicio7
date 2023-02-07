@@ -31,6 +31,8 @@
     <string name="comprar">Comprar</string>
     <string name="vender">Vender</string>
     <string name="cancelar">Cancelar</string>
+    <string name="menos">-</string>
+    <string name="mas">+</string>
     <string-array name="Objetos">
         <item>Espada</item>
         <item>Escudo</item>
