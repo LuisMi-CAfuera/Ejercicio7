@@ -1,6 +1,7 @@
 package com.example.ejercicio7
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,8 +18,9 @@ class Ejercicio9 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMain3Binding.inflate(layoutInflater)
         setContentView(binding.root)
+        val shared= getSharedPreferences("Personaje", Context.MODE_PRIVATE)
         val gson = Gson()
-        val json = intent.getStringExtra("Personaje")
+        var json = shared.getString("Personaje", "")
         val p = gson.fromJson(json, Personaje::class.java)
         p.vida = 200
         p.pesoMochila = 100
@@ -96,8 +98,11 @@ class Ejercicio9 : AppCompatActivity() {
 
         binding.Seguir.setOnClickListener{
             val intent2 = Intent(this@Ejercicio9, Ejercicio10::class.java)
-            val json2 = gson.toJson(p)
-            intent2.putExtra("Personaje", json2)
+            val editor = shared.edit()
+            editor.clear()
+            json = gson.toJson(p)
+            editor.putString("Personaje", json)
+            editor.apply()
             startActivity(intent2)
         }
 

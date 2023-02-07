@@ -1,5 +1,6 @@
 package com.example.ejercicio7
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val p = Personaje()
-        val mPrefs = getPreferences(MODE_PRIVATE)
+
 
         binding.Guerrero.setOnClickListener {
             binding.imagenes.setImageResource(R.drawable.guerrero2)
@@ -38,14 +39,17 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+
         binding.Aceptar.setOnClickListener {
             //cambiar de activity
             val intent = Intent(this@MainActivity, Ejercicio8::class.java)
+            val shared =  getSharedPreferences("Personaje", Context.MODE_PRIVATE)
+            val editor = shared.edit()
+            editor.clear()
             val gson = Gson()
             val json = gson.toJson(p)
-            intent.putExtra("Personaje", json)
-
-
+            editor.putString("Personaje", json)
+            editor.apply()
             startActivity(intent)
         }
     }

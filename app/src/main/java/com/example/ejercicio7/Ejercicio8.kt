@@ -1,5 +1,6 @@
 package com.example.ejercicio7
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,11 +14,10 @@ class Ejercicio8 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)
+        val shared= getSharedPreferences("Personaje", Context.MODE_PRIVATE)
         val gson = Gson()
-        val json = intent.getStringExtra("Personaje")
+        var json = shared.getString("Personaje", "")
         val p = gson.fromJson(json, Personaje::class.java)
-
-
 
 
         binding.Orco.setOnClickListener{
@@ -39,8 +39,11 @@ class Ejercicio8 : AppCompatActivity() {
 
         binding.Aceptar.setOnClickListener{
             val intent = Intent(this@Ejercicio8, Ejercicio9::class.java)
-            val json2 = gson.toJson(p)
-            intent.putExtra("Personaje", json2)
+            val editor = shared.edit()
+            editor.clear()
+            json = gson.toJson(p)
+            editor.putString("Personaje", json)
+            editor.apply()
             startActivity(intent)
         }
 

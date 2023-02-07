@@ -28,4 +28,14 @@
     <string name="entrar_a_la_ciudad">Entrar A la Ciudad</string>
     <string name="hablar">Hablar</string>
     <string name="comerciar">Comerciar</string>
+    <string name="comprar">Comprar</string>
+    <string name="vender">Vender</string>
+    <string name="cancelar">Cancelar</string>
+    <string-array name="Objetos">
+        <item>Espada</item>
+        <item>Escudo</item>
+        <item>Lanza</item>
+        <item>Arco</item>
+        <item>Pocion de HP</item>
+    </string-array>
 </resources>

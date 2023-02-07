@@ -1,6 +1,7 @@
 package com.example.ejercicio7
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -16,9 +17,11 @@ class Ejercicio10 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMain4Binding.inflate(layoutInflater)
         setContentView(binding.root)
+        val shared= getSharedPreferences("Personaje", Context.MODE_PRIVATE)
         val gson = Gson()
-        val json = intent.getStringExtra("Personaje")
+        var json = shared.getString("Personaje", "")
         val p = gson.fromJson(json, Personaje::class.java)
+
         binding.Valle.setImageResource(R.drawable.valle)
         binding.PesoMochila.isEnabled = false
 
@@ -31,6 +34,11 @@ class Ejercicio10 : AppCompatActivity() {
             binding.PesoMochila.isEnabled = false
         }
 
+        val editor = shared.edit()
+        editor.clear()
+        json = gson.toJson(p)
+        editor.putString("Personaje", json)
+        editor.apply()
 
         binding.Dado.setOnClickListener{
             aleatorio(p)
@@ -58,7 +66,6 @@ class Ejercicio10 : AppCompatActivity() {
                 binding.BotonC.text = "Ir a Objeto"
                 binding.BotonC.setOnClickListener {
                     intent = Intent(this@Ejercicio10, Objeto::class.java)
-                    intent.putExtra("Personaje", json)
                     startActivity(intent)
                 }
             }
@@ -69,7 +76,6 @@ class Ejercicio10 : AppCompatActivity() {
                 binding.BotonC.text = "Ir a Ciudad"
                 binding.BotonC.setOnClickListener {
                     intent = Intent(this@Ejercicio10, Ciudad::class.java)
-                    intent.putExtra("Personaje", json)
                     startActivity(intent)
                 }
             }
@@ -80,7 +86,6 @@ class Ejercicio10 : AppCompatActivity() {
                 binding.BotonC.text = "Hablar con Mercader"
                 binding.BotonC.setOnClickListener {
                     intent = Intent(this@Ejercicio10, Mercader::class.java)
-                    intent.putExtra("Personaje", json)
                     startActivity(intent)
                 }
             }
@@ -91,7 +96,6 @@ class Ejercicio10 : AppCompatActivity() {
                 binding.BotonC.text = "Pelear con Enemigo"
                 binding.BotonC.setOnClickListener {
                     intent = Intent(this@Ejercicio10, Ladron::class.java)
-                    intent.putExtra("Personaje", json)
                     startActivity(intent)
                 }
             }

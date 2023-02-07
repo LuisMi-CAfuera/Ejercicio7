@@ -1,5 +1,8 @@
 package com.example.ejercicio7
 
+import android.content.Context
+import com.google.gson.Gson
+
 class Personaje{
     var nombre: String = ""
     var pesoMochila: Int = 0
@@ -155,6 +158,8 @@ class Personaje{
 
         return p
     }
+
+
 
     override fun toString(): String {
         return "Personaje(nombre='$nombre', pesoMochila=$pesoMochila, " +
