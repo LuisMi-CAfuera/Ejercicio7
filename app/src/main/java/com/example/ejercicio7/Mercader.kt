@@ -56,22 +56,25 @@ class Mercader : AppCompatActivity() {
         when(binding.spinner.selectedItem.toString()){
 
             "Espada" -> {
+                binding.Mercader.setImageResource(R.drawable.espada)
                 binding.CantidadYPrecio.text = "Cantidad: ${cantidad} Precio: ${espada.valor*cantidad}"
             }
 
             "Escudo" -> {
+                binding.Mercader.setImageResource(R.drawable.escudo)
                 binding.CantidadYPrecio.text = "Cantidad: ${cantidad} Precio: ${escudo.valor*cantidad}"
             }
 
             "Armadura" -> {
+                binding.Mercader.setImageResource(R.drawable.armadura)
                 binding.CantidadYPrecio.text = "Cantidad: ${cantidad} Precio: ${armadura.valor*cantidad}"
             }
 
             "Pocion" -> {
+                binding.Mercader.setImageResource(R.drawable.pocion)
                 binding.CantidadYPrecio.text = "Cantidad: ${cantidad} Precio: ${pocion.valor*cantidad}"
             }
         }
-
 
 
 
