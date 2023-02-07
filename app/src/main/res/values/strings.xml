@@ -36,8 +36,7 @@
     <string-array name="Objetos">
         <item>Espada</item>
         <item>Escudo</item>
-        <item>Lanza</item>
-        <item>Arco</item>
+        <item>Armadura</item>
         <item>Pocion de HP</item>
     </string-array>
 </resources>

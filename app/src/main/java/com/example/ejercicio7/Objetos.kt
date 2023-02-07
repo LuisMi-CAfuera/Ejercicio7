@@ -1,11 +1,13 @@
 package com.example.ejercicio7
 
 class Objetos{
+    var nombre :String= ""
     var peso :Int= 0
     var valor :Int= 0
     var vida :Int= 0
 
-    constructor(peso: Int, valor: Int, vida: Int) {
+    constructor(nombre:String,peso: Int, valor: Int, vida: Int) {
+        this.nombre = nombre
         this.peso = peso
         this.valor = valor
         this.vida = vida

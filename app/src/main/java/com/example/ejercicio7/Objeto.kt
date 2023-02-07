@@ -21,7 +21,7 @@ class Objeto : AppCompatActivity() {
         val p = gson.fromJson(json, Personaje::class.java)
 
         //Un objeto objetos inicializado con el peso y el valor y la vida
-        val objeto = Objetos((1..5).random(), (1..10).random(), (1..20).random())
+        val objeto = Objetos("Objeto Random",(1..5).random(), (1..10).random(), (1..20).random())
 
 
 
