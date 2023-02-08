@@ -34,6 +34,7 @@
     <string name="menos">-</string>
     <string name="mas">+</string>
     <string-array name="Objetos">
+        <item> </item>
         <item>Espada</item>
         <item>Escudo</item>
         <item>Armadura</item>

@@ -12,10 +12,10 @@
         android:layout_height="289dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.034"
+        app:layout_constraintVertical_bias="0.083"
         tools:srcCompat="@drawable/mercader" />
 
     <Button
@@ -28,7 +28,7 @@
         app:layout_constraintHorizontal_bias="0.268"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Mercader"
-        app:layout_constraintVertical_bias="0.287" />
+        app:layout_constraintVertical_bias="0.134" />
 
     <Button
         android:id="@+id/Volver"
@@ -39,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/Comerciar"
         app:layout_constraintTop_toBottomOf="@+id/Mercader"
-        app:layout_constraintVertical_bias="0.286" />
+        app:layout_constraintVertical_bias="0.134" />
 
     <Button
         android:id="@+id/Comprar"
@@ -49,10 +49,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.129"
+        app:layout_constraintHorizontal_bias="0.156"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Comerciar"
-        app:layout_constraintVertical_bias="0.626" />
+        app:layout_constraintVertical_bias="0.628" />
 
     <Button
         android:id="@+id/Vender"
@@ -88,10 +88,9 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/Comerciar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Mercader"
-        app:layout_constraintVertical_bias="0.587" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/CantidadYPrecio"
@@ -103,8 +102,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Comerciar"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner"
+        app:layout_constraintVertical_bias="0.295" />
 
     <Button
         android:id="@+id/mas"
@@ -113,11 +112,11 @@
         android:text="@string/mas"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/Comprar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.272"
+        app:layout_constraintEnd_toStartOf="@+id/menos"
+        app:layout_constraintHorizontal_bias="0.602"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Comerciar"
-        app:layout_constraintVertical_bias="0.725" />
+        app:layout_constraintVertical_bias="0.241" />
 
     <Button
         android:id="@+id/menos"
@@ -125,11 +124,21 @@
         android:layout_height="wrap_content"
         android:text="@string/menos"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/Vender"
+        app:layout_constraintBottom_toTopOf="@+id/Cancelar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.394"
         app:layout_constraintStart_toEndOf="@+id/mas"
         app:layout_constraintTop_toBottomOf="@+id/Volver"
-        app:layout_constraintVertical_bias="0.725" />
+        app:layout_constraintVertical_bias="0.241" />
+
+    <Button
+        android:id="@+id/ComprarOVender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comprar"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/Vender"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

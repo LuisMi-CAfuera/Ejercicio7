@@ -19,6 +19,16 @@ class Personaje{
     var vida : Int=0
     var contvic : Int=0
     var mochila : ArrayList<Objetos> = ArrayList()
+    //Monedero que sea un diccionario con el nombre del objeto y el valor
+    var monedero : HashMap<String, Int> = HashMap()
+
+    init {
+        monedero.put("1", 0)
+        monedero.put("10", 0)
+        monedero.put("20", 0)
+        monedero.put("50", 0)
+        monedero.put("100", 0)
+    }
 
 
 
