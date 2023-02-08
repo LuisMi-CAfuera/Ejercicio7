@@ -179,10 +179,9 @@ class Mercader : AppCompatActivity() {
                 }
 
                 binding.ComprarOVender.setOnClickListener{
+                    aux = pago / 100
+                    if(aux > 0){
 
-
-                    if(pago % p.monedero.getValue("100") == 0 ){
-                        
                     }
                 }
 
