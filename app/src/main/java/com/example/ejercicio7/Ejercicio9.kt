@@ -23,7 +23,7 @@ class Ejercicio9 : AppCompatActivity() {
         var json = shared.getString("Personaje", "")
         val p = gson.fromJson(json, Personaje::class.java)
         p.vida = 200
-        p.pesoMochila = 100
+        p.pesoMochila = 200
         p.fuerza = (10..15).random()
         p.defensa = (1..5).random()
 

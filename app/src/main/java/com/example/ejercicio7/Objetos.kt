@@ -12,6 +12,7 @@ class Objetos{
         this.valor = valor
         this.vida = vida
     }
+    constructor()
 
     override fun toString(): String {
         return "Objetos(peso=$peso, valor=$valor, vida=$vida)"
