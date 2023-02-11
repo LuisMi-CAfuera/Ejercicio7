@@ -3,7 +3,6 @@ package com.example.ejercicio7
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -95,11 +94,24 @@ class Ejercicio10 : AppCompatActivity() {
                 binding.BotonC.visibility = View.VISIBLE
                 binding.BotonC.text = "Pelear con Enemigo"
                 binding.BotonC.setOnClickListener {
-                    intent = Intent(this@Ejercicio10, Ladron::class.java)
-                    startActivity(intent)
+                    tipoEnemigo()
                 }
             }
         }
+    }
+
+    fun tipoEnemigo(){
+        val aleatorio = (1..10).random()
+
+        if(aleatorio in 1..9){
+            intent = Intent(this@Ejercicio10, Enemigo::class.java)
+            startActivity(intent)
+        }else if(aleatorio == 10){
+            intent = Intent(this@Ejercicio10, Jefe::class.java)
+            startActivity(intent)
+        }
+
+
     }
 
 

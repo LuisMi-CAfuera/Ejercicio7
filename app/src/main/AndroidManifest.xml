@@ -5,21 +5,21 @@
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
+        <activity
+            android:name=".Jefe"
+            android:exported="false" />
         <activity
             android:name=".Comerciar"
             android:exported="false" />
         <activity
             android:name=".EntradaACiu"
-            android:exported="false" />
-        <activity
-            android:name=".Lucha"
             android:exported="false" />
         <activity
             android:name=".Objeto"
@@ -28,7 +28,7 @@
             android:name=".Mercader"
             android:exported="false" />
         <activity
-            android:name=".Ladron"
+            android:name=".Enemigo"
             android:exported="false" />
         <activity
             android:name=".Ciudad"
