@@ -37,6 +37,7 @@
     <string name="_100_100">100/100</string>
     <string name="vida_jugador">Vida Jugador</string>
     <string name="objetos">objetos</string>
+    <string name="atacar">Atacar</string>
     <string-array name="Objetos">
         <item> </item>
         <item>Espada</item>

@@ -105,9 +105,11 @@ class Ejercicio10 : AppCompatActivity() {
 
         if(aleatorio in 1..9){
             intent = Intent(this@Ejercicio10, Enemigo::class.java)
+            intent.putExtra("tipo", "Normal")
             startActivity(intent)
         }else if(aleatorio == 10){
-            intent = Intent(this@Ejercicio10, Jefe::class.java)
+            intent = Intent(this@Ejercicio10, Enemigo::class.java)
+            intent.putExtra("tipo", "Boss")
             startActivity(intent)
         }
 

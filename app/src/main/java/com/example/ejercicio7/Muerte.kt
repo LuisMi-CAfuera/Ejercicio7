@@ -3,9 +3,9 @@ package com.example.ejercicio7
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class Jefe : AppCompatActivity() {
+class Muerte : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_jefe)
+        setContentView(R.layout.activity_muerte)
     }
 }
