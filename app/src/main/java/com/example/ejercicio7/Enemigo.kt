@@ -28,9 +28,9 @@ class Enemigo : AppCompatActivity() {
         enemigo.defensa = (1..5).random()
 
 
-        if(tipo == "Normal"){
+        if (tipo == "Normal") {
             binding.imageView2.setImageResource(R.drawable.enemigo1)
-        }else if(tipo == "Boss"){
+        } else if (tipo == "Boss") {
             binding.imageView2.setImageResource(R.drawable.enemigo)
             binding.HPEnemigo.text = "HP Boss"
             enemigo.vida = 200
@@ -41,15 +41,18 @@ class Enemigo : AppCompatActivity() {
 
 
         binding.Atacar.setOnClickListener {
-            atacarEnemigo(p, enemigo,tipo)
-            if(enemigo.vida <= 0){
-                for (i in 1..3){
+            atacarEnemigo(p, enemigo, tipo)
+            if (enemigo.vida <= 0) {
+                for (i in 1..3) {
                     p.mochila.add(Objetos("Pocion", 2, 50, 100))
                     p.pesoMochila -= 2
                 }
-                binding.turno.text = "Has ganado el combate"
-                binding.Huir.text = "Continuar"
-                binding.Huir.setOnClickListener {
+                p.monedero["50"] = 100
+                binding.turno.text = "Has ganado el combate, conseguiste 3 pociones y 100 monedas de 50"
+                binding.Atacar.text = "Continuar"
+                binding.Huir.isEnabled = false
+                binding.Objetos.isEnabled = false
+                binding.Atacar.setOnClickListener {
                     val editor = shared.edit()
                     editor.clear()
                     json = gson.toJson(p)
@@ -58,10 +61,10 @@ class Enemigo : AppCompatActivity() {
                     val intent = Intent(this@Enemigo, Ejercicio10::class.java)
                     startActivity(intent)
                 }
-            }else  if(p.vida <= 0){
+            } else if (p.vida <= 0) {
                 val intent = Intent(this@Enemigo, Muerte::class.java)
                 startActivity(intent)
-            }else{
+            } else {
 
                 if (tipo == "Normal") {
                     p.vida -= 20 / p.defensa
@@ -85,26 +88,36 @@ class Enemigo : AppCompatActivity() {
                 binding.cantidadHP2.text = "200/${p.vida}"
             }
 
-        }
+            if (p.vida <= 0) {
+                val intent = Intent(this@Enemigo, Muerte::class.java)
+                startActivity(intent)
 
-        binding.Huir.setOnClickListener {
-            val editor = shared.edit()
-            editor.clear()
-            json = gson.toJson(p)
-            editor.putString("Personaje", json)
-            editor.apply()
-            if (tipo != null) {
-                huir()
             }
-            if (tipo == "Normal") {
-                p.vida -= 20 / p.defensa
-                binding.cantidadHP2.text = "200/${p.vida}"
-            } else if (tipo == "Boss") {
-                p.vida -= 30 / p.defensa
-                binding.cantidadHP2.text = "200/${p.vida}"
+
+            binding.Huir.setOnClickListener {
+                val editor = shared.edit()
+                editor.clear()
+                json = gson.toJson(p)
+                editor.putString("Personaje", json)
+                editor.apply()
+                if (tipo != null) {
+                    huir()
+                }
+                if (tipo == "Normal") {
+                    p.vida -= 20 / p.defensa
+                    binding.cantidadHP2.text = "200/${p.vida}"
+                } else if (tipo == "Boss") {
+                    p.vida -= 30 / p.defensa
+                    binding.cantidadHP2.text = "200/${p.vida}"
+                }
+
+                if (p.vida <= 0) {
+                    val intent = Intent(this@Enemigo, Muerte::class.java)
+                    startActivity(intent)
+                }
+
             }
         }
-
     }
 
     @SuppressLint("SetTextI18n")

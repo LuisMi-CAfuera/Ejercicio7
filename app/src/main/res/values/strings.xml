@@ -38,6 +38,7 @@
     <string name="vida_jugador">Vida Jugador</string>
     <string name="objetos">objetos</string>
     <string name="atacar">Atacar</string>
+    <string name="volver_a_empezar">Volver a empezar</string>
     <string-array name="Objetos">
         <item> </item>
         <item>Espada</item>
