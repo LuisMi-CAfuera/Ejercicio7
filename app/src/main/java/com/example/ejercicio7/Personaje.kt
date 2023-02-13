@@ -17,7 +17,6 @@ class Personaje{
     var sabiduria : Int=0
     var carisma : Int=0
     var vida : Int=0
-    var contvic : Int=0
     var mochila : ArrayList<Objetos> = ArrayList()
     //Monedero que sea un diccionario con el nombre del objeto y el valor
     var monedero : MutableMap<String,Int> = mutableMapOf(
@@ -31,7 +30,7 @@ class Personaje{
 
 
     constructor()
-    constructor(nombre: String, pesoMochila: Int, estadoVital: String, raza: String, clase: String, fuerza: Int, destreza: Int,defensa : Int, inteligencia: Int, constitucion: Int, sabiduria: Int, carisma: Int, vida: Int, contvic: Int, mochila: ArrayList<Objetos>) {
+    constructor(nombre: String, pesoMochila: Int, estadoVital: String, raza: String, clase: String, fuerza: Int, destreza: Int,defensa : Int, inteligencia: Int, constitucion: Int, sabiduria: Int, carisma: Int, vida: Int, mochila: ArrayList<Objetos>) {
         this.nombre = nombre
         this.pesoMochila = pesoMochila
         this.estadoVital = estadoVital
@@ -45,7 +44,6 @@ class Personaje{
         this.sabiduria = sabiduria
         this.carisma = carisma
         this.vida = vida
-        this.contvic = contvic
         this.mochila = mochila
     }
 
@@ -175,7 +173,7 @@ class Personaje{
                 "fuerza=$fuerza, destreza=$destreza, defensa=$defensa, " +
                 "inteligencia=$inteligencia, constitucion=$constitucion, " +
                 "sabiduria=$sabiduria, carisma=$carisma, vida=$vida, " +
-                "contvic=$contvic, mochila=$mochila)"
+                "mochila=$mochila)"
     }
 
 
