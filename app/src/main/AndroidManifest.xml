@@ -16,9 +16,6 @@
             android:name=".Muerte"
             android:exported="false" />
         <activity
-            android:name=".Jefe"
-            android:exported="false" />
-        <activity
             android:name=".Comerciar"
             android:exported="false" />
         <activity
