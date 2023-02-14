@@ -34,14 +34,14 @@ class DbHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,null
 
         //Tabla Mochila
         private const val TABLE_MOCHILA = "mochila"
-        private const val mochila_id = "mochila_id"
+        private const val mochila_id = "id_mochila"
         private const val objeto_id = "id_objeto"
         private const val PESO_MOCHILA = "peso_mochila"
         private const val PESO_MAXIMO = "peso_maximo"
 
         //Tabla Monedero
         private const val TABLE_MONEDERO = "monedero"
-        private const val monedero_id = "monedero_id"
+        private const val monedero_id = "id_monedero"
         private const val personaje_id = "personaje_id"
         private const val uno = "1"
         private const val diez = "10"
