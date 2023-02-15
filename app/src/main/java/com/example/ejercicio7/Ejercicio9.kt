@@ -26,6 +26,7 @@ class Ejercicio9 : AppCompatActivity() {
         p.pesoMochila = 200
         p.fuerza = (10..15).random()
         p.defensa = (1..5).random()
+        binding.Seguir.isEnabled = false
 
 
         when(p.clase){
@@ -77,6 +78,7 @@ class Ejercicio9 : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                binding.Seguir.isEnabled = true
                 p.nombre = binding.Nombre.toString()
             }
             override fun afterTextChanged(s: Editable?) {

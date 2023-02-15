@@ -18,22 +18,27 @@ class Ejercicio8 : AppCompatActivity() {
         val gson = Gson()
         var json = shared.getString("Personaje", "")
         val p = gson.fromJson(json, Personaje::class.java)
+        binding.Aceptar.isEnabled = false
 
 
         binding.Orco.setOnClickListener{
             binding.imageView.setImageResource(R.drawable.orco)
+            binding.Aceptar.isEnabled = true
             p.raza = "Orco"
         }
         binding.Elfo.setOnClickListener{
             binding.imageView.setImageResource(R.drawable.elfo)
+            binding.Aceptar.isEnabled = true
             p.raza = "Elfo"
         }
         binding.Humano.setOnClickListener{
             binding.imageView.setImageResource(R.drawable.humano)
+            binding.Aceptar.isEnabled = true
             p.raza = "Humano"
         }
         binding.Enano.setOnClickListener{
             binding.imageView.setImageResource(R.drawable.enano)
+            binding.Aceptar.isEnabled = true
             p.raza = "Enano"
         }
 

@@ -54,4 +54,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="16dp" />
+
+    <TextView
+        android:id="@+id/Contador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/te_queda_derrotar_5_enemigos"
+        app:layout_constraintBottom_toTopOf="@+id/Continuar"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/Entrada" />
 </androidx.constraintlayout.widget.ConstraintLayout>

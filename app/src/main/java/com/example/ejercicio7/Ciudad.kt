@@ -1,5 +1,6 @@
 package com.example.ejercicio7
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import com.google.gson.Gson
 
 class Ciudad : AppCompatActivity() {
     private lateinit var binding: ActivityCiudadBinding
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCiudadBinding.inflate(layoutInflater)
@@ -19,6 +21,11 @@ class Ciudad : AppCompatActivity() {
         val p = gson.fromJson(json, Personaje::class.java)
         var cont = intent.getIntExtra("cont", 0)
         var intent = Intent(this@Ciudad, Ciudad::class.java)
+
+
+        if(cont > 0){
+            binding.Contador.text = "LLevas "+cont+" batallas ganadas \n necesitas 5 para ganar"
+        }
 
 
         binding.Entrar.setOnClickListener{
