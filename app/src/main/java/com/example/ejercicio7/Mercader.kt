@@ -379,6 +379,8 @@ class Mercader : AppCompatActivity() {
                             ido = "Espada"
                             binding.mas.setOnClickListener {
                                 if(cantidad < objetos["Espada"]!!){
+                                    p.mochila -= espada
+                                    p.pesoMochila += espada.peso
                                     cantidad++
                                     pago = cantidad * espada.valor
                                     binding.CantidadYPrecio.text =
@@ -387,6 +389,8 @@ class Mercader : AppCompatActivity() {
                             }
                             binding.menos.setOnClickListener {
                                 if (cantidad > 0) {
+                                    p.mochila.add(espada)
+                                    p.pesoMochila -= espada.peso
                                     cantidad--
                                     pago = cantidad * espada.valor
                                     binding.CantidadYPrecio.text =
@@ -397,6 +401,8 @@ class Mercader : AppCompatActivity() {
                         "Escudo"->{
                             binding.mas.setOnClickListener {
                                 if(cantidad < objetos["Escudo"]!!){
+                                    p.mochila -= escudo
+                                    p.pesoMochila += escudo.peso
                                     cantidad++
                                     pago = cantidad * escudo.valor
                                     binding.CantidadYPrecio.text =
@@ -405,6 +411,8 @@ class Mercader : AppCompatActivity() {
                             }
                             binding.menos.setOnClickListener {
                                 if (cantidad > 0) {
+                                    p.mochila.add(escudo)
+                                    p.pesoMochila -= escudo.peso
                                     cantidad--
                                     pago = cantidad * escudo.valor
                                     binding.CantidadYPrecio.text =
@@ -415,6 +423,8 @@ class Mercader : AppCompatActivity() {
                         "Armadura"->{
                             binding.mas.setOnClickListener {
                                 if(cantidad < objetos["Armadura"]!!){
+                                    p.mochila -= armadura
+                                    p.pesoMochila += armadura.peso
                                     cantidad++
                                     pago = cantidad * armadura.valor
                                     binding.CantidadYPrecio.text =
@@ -423,6 +433,8 @@ class Mercader : AppCompatActivity() {
                             }
                             binding.menos.setOnClickListener {
                                 if (cantidad > 0) {
+                                    p.mochila.add(armadura)
+                                    p.pesoMochila -= armadura.peso
                                     cantidad--
                                     pago = cantidad * armadura.valor
                                     binding.CantidadYPrecio.text =
@@ -434,6 +446,8 @@ class Mercader : AppCompatActivity() {
 
                             binding.mas.setOnClickListener {
                                 if(cantidad < objetos["Pocion"]!!){
+                                    p.mochila -= pocion
+                                    p.pesoMochila += pocion.peso
                                     cantidad++
                                     pago = cantidad * pocion.valor
                                     binding.CantidadYPrecio.text =
@@ -442,7 +456,10 @@ class Mercader : AppCompatActivity() {
                             }
                             binding.menos.setOnClickListener {
                                 if (cantidad > 0) {
+                                    p.mochila.add(pocion)
+                                    p.pesoMochila -= pocion.peso
                                     cantidad--
+                                    p.mochila.remove(pocion)
                                     pago = cantidad * pocion.valor
                                     binding.CantidadYPrecio.text =
                                         "Cantidad: $cantidad Precio: ${cantidad * pocion.valor} Peso: ${cantidad * pocion.peso}"
@@ -486,36 +503,36 @@ class Mercader : AppCompatActivity() {
                         binding.Comerciar.visibility = View.VISIBLE
                         binding.Volver.visibility = View.VISIBLE
 
-                        when(ido){
-                            "Espada"->{
-                                for(i in 0 until cantidad){
-                                    p.mochila.remove(espada)
-                                    objetos["Espada"] = objetos["Espada"]!! - 1
-                                    p.pesoMochila -= espada.peso
-                                }
-                            }
-                            "Escudo"->{
-                                for(i in 0 until cantidad){
-                                    p.mochila.remove(escudo)
-                                    objetos["Escudo"] = objetos["Escudo"]!! - 1
-                                    p.pesoMochila -= escudo.peso
-                                }
-                            }
-                            "Armadura"->{
-                                for(i in 0 until cantidad){
-                                    p.mochila.remove(armadura)
-                                    objetos["Armadura"] = objetos["Armadura"]!! - 1
-                                    p.pesoMochila -= armadura.peso
-                                }
-                            }
-                            "Pocion"->{
-                                for(i in 0 until cantidad){
-                                    p.mochila.remove(pocion)
-                                    objetos["Pocion"] = objetos["Pocion"]!! - 1
-                                    p.pesoMochila -= pocion.peso
-                                }
-                            }
-                        }
+//                        when(ido){
+//                            "Espada"->{
+//                                for(i in 0 until cantidad){
+//                                    p.mochila.remove(Objetos("Espada", 14, 125, 200))
+//                                    objetos["Espada"] = objetos["Espada"]!! - 1
+//                                    p.pesoMochila += 14
+//                                }
+//                            }
+//                            "Escudo"->{
+//                                for(i in 0 until cantidad){
+//                                    p.mochila.remove(Objetos("Escudo", 10, 100, 250))
+//                                    objetos["Escudo"] = objetos["Escudo"]!! - 1
+//                                    p.pesoMochila += 10
+//                                }
+//                            }
+//                            "Armadura"->{
+//                                for(i in 0 until cantidad){
+//                                    p.mochila.remove(Objetos("Armadura", 20, 150, 300))
+//                                    objetos["Armadura"] = objetos["Armadura"]!! - 1
+//                                    p.pesoMochila += 20
+//                                }
+//                            }
+//                            "Pocion"->{
+//                                for(i in 0 until cantidad){
+//                                    p.mochila.remove(Objetos("Pocion", 2, 50, 100))
+//                                    objetos["Pocion"] = objetos["Pocion"]!! - 1
+//                                    p.pesoMochila += 2
+//                                }
+//                            }
+//                        }
                         binding.CantidadYPrecio.text = "Ganaste $pago2 \n" +
                                 "Ahora tienes ${p.monedero["100"]} billetes de 100,\n" +
                                 "${p.monedero["50"]} billetes de 50,\n " +

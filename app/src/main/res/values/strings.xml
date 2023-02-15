@@ -40,7 +40,6 @@
     <string name="atacar">Atacar</string>
     <string name="volver_a_empezar">Volver a empezar</string>
     <string name="entrar_a_n_ciudad">Entrar a \n Ciudad</string>
-    <string name="te_queda_derrotar_5_enemigos">Te queda derrotar 5 enemigos</string>
     <string-array name="Objetos">
         <item> </item>
         <item>Espada</item>

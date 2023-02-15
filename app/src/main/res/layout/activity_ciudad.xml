@@ -59,7 +59,7 @@
         android:id="@+id/Contador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/te_queda_derrotar_5_enemigos"
+        android:text="Te queda derrotar 5 enemigos"
         app:layout_constraintBottom_toTopOf="@+id/Continuar"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/guideline2"

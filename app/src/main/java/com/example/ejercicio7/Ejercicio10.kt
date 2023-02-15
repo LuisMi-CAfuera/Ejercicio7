@@ -26,8 +26,8 @@ class Ejercicio10 : AppCompatActivity() {
 
 
 
-        if(p.pesoMochila < 100){
-            binding.PesoMochila.text = "Mochila: ${p.pesoMochila}/100"
+        if(p.pesoMochila < 200){
+            binding.PesoMochila.text = "Mochila: ${p.pesoMochila}/200"
             binding.PesoMochila.isEnabled = true
         }else{
             binding.PesoMochila.isEnabled = false

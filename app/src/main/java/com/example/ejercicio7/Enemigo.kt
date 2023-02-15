@@ -152,7 +152,7 @@ class Enemigo : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     fun objetos(personaje: Personaje){
-        if(personaje.vida < 100 && personaje.mochila.contains(Objetos("Pocion", 2, 50, 100))){
+        if(personaje.vida < 200 ){
             personaje.mochila.remove(Objetos("Pocion", 2, 50, 100))
             personaje.vida += 20
             binding.cantidadHP2.text = "200/${personaje.vida}"

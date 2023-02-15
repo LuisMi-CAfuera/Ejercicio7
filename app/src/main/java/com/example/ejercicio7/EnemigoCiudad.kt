@@ -39,10 +39,10 @@ class EnemigoCiudad : AppCompatActivity() {
         }
 
 
-
         binding.Atacar.setOnClickListener {
-            atacarEnemigo(p, enemigo, tipo)
-            if (enemigo.vida <= 0) {
+            if(enemigo.vida > 0 && p.vida > 0) {
+                atacarEnemigo(p, enemigo, tipo)
+            }else if (enemigo.vida <= 0) {
                 for (i in 1..3) {
                     p.mochila.add(Objetos("Pocion", 2, 50, 100))
                     p.pesoMochila -= 2
@@ -137,6 +137,7 @@ class EnemigoCiudad : AppCompatActivity() {
             binding.turno.text = "Has fallado el ataque,\n ahora es el turno del enemigo"
 
         }
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -153,7 +154,7 @@ class EnemigoCiudad : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     fun objetos(personaje: Personaje){
-        if(personaje.vida < 100 && personaje.mochila.contains(Objetos("Pocion", 2, 50, 100))){
+        if(personaje.vida < 200 && personaje.mochila.contains(Objetos("Pocion", 2, 50, 100))){
             personaje.mochila.remove(Objetos("Pocion", 2, 50, 100))
             personaje.vida += 20
             binding.cantidadHP2.text = "200/${personaje.vida}"
