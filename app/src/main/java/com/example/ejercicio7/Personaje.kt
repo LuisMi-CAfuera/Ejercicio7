@@ -20,11 +20,11 @@ class Personaje{
     var mochila : ArrayList<Objetos> = ArrayList()
     //Monedero que sea un diccionario con el nombre del objeto y el valor
     var monedero : MutableMap<String,Int> = mutableMapOf(
-        "1" to 0,
-        "10" to 0,
-        "20" to 0,
-        "50" to 0,
-        "100" to 0
+        "1" to 100,
+        "10" to 100,
+        "20" to 100,
+        "50" to 100,
+        "100" to 100
     )
 
 

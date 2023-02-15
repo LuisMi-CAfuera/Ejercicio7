@@ -41,15 +41,22 @@ class DbHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,null
         //Tabla Mochila
         private const val TABLE_MOCHILA = "mochila"
         private const val MOCHILA_ID = "id_mochila"
-        private const val OBJETO_ID = "id_objeto"
         private const val PESO_MOCHILA = "peso_mochila"
         private const val PESO_MAXIMO = "peso_maximo"
         private const val CREATE_TABLE_MOCHILA = ("CREATE TABLE " + TABLE_MOCHILA + "("
                 + MOCHILA_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + OBJETO_ID + " INTEGER,"
                 + PESO_MOCHILA + " INTEGER,"
-                + PESO_MAXIMO + " INTEGER,"
-                + "FOREIGN KEY (" + OBJETO_ID + ") REFERENCES " + TABLE_OBJETOS_ALEATORIOS + "(" + ID_OBJETO + ")"
+                + PESO_MAXIMO + " INTEGER"
+                + ")")
+        //Tabla de Objetos y mochila
+        private const val TABLE_OBJETOS_Y_MOCHILA = "objetos_y_mochila"
+        private const val ID_OBJETO_Y_MOCHILA_OBJETO = "id_objeto"
+        private const val ID_OBJETO_Y_MOCHILA_MOCHILA = "id_mochila"
+        private const val CREATE_TABLE_OBJETOS_Y_MOCHILA = ("CREATE TABLE " + TABLE_OBJETOS_Y_MOCHILA + "("
+                + ID_OBJETO_Y_MOCHILA_OBJETO + " INTEGER,"
+                + ID_OBJETO_Y_MOCHILA_MOCHILA + " INTEGER,"
+                + "FOREIGN KEY (" + ID_OBJETO_Y_MOCHILA_OBJETO + ") REFERENCES " + TABLE_OBJETOS_ALEATORIOS + "(" + ID_OBJETO + "),"
+                + "FOREIGN KEY (" + ID_OBJETO_Y_MOCHILA_MOCHILA + ") REFERENCES " + TABLE_MOCHILA + "(" + MOCHILA_ID + ")"
                 + ")")
         //Tabla Monedero
         private const val TABLE_MONEDERO = "monedero"

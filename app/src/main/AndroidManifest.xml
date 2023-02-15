@@ -13,13 +13,19 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".ObjetoCiudad"
+            android:exported="false" />
+        <activity
+            android:name=".EnemigoCiudad"
+            android:exported="false" />
+        <activity
+            android:name=".MercaderCiudad"
+            android:exported="false" />
+        <activity
             android:name=".Muerte"
             android:exported="false" />
         <activity
             android:name=".Comerciar"
-            android:exported="false" />
-        <activity
-            android:name=".EntradaACiu"
             android:exported="false" />
         <activity
             android:name=".Objeto"

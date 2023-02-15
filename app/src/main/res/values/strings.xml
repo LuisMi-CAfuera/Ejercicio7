@@ -39,6 +39,7 @@
     <string name="objetos">objetos</string>
     <string name="atacar">Atacar</string>
     <string name="volver_a_empezar">Volver a empezar</string>
+    <string name="entrar_a_n_ciudad">Entrar a \n Ciudad</string>
     <string-array name="Objetos">
         <item> </item>
         <item>Espada</item>

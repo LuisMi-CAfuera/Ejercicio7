@@ -1,5 +1,6 @@
 package com.example.ejercicio7
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,27 +13,48 @@ class Ciudad : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCiudadBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val shared= getSharedPreferences("Personaje", Context.MODE_PRIVATE)
         val gson = Gson()
-        val json = intent.getStringExtra("Personaje")
+        var json = shared.getString("Personaje", "")
         val p = gson.fromJson(json, Personaje::class.java)
+        var cont = intent.getIntExtra("cont", 0)
+        var intent = Intent(this@Ciudad, Ciudad::class.java)
 
-        binding.ciudad.setImageResource(R.drawable.ciudad)
+
+        binding.Entrar.setOnClickListener{
+            val aleatorio = (1..3).random()
+            val al2 = (1..10).random()
+            var tipo = ""
+            when(aleatorio){
+                1 -> intent = Intent(this@Ciudad, ObjetoCiudad::class.java)
+                2 -> intent = Intent(this@Ciudad, EnemigoCiudad::class.java)
+                3 -> intent = Intent(this@Ciudad, EnemigoCiudad::class.java)
+            }
+
+            if(al2 == 1){
+                intent.putExtra("tipo", "Boss")
+            }else if(al2 in 2..10){
+                intent.putExtra("tipo", "Normal")
+            }
+            startActivity(intent)
+        }
 
 
-
+        binding.Continuar.isEnabled = cont == 5
 
         binding.Continuar.setOnClickListener{
-            val intent = Intent(this@Ciudad, EntradaACiu::class.java)
-            val json2 = gson.toJson(p)
-            intent.putExtra("Personaje", json2)
+            val intent = Intent(this@Ciudad, Ejercicio10::class.java)
+            val editor = shared.edit()
+            editor.clear()
+            json = gson.toJson(p)
+            editor.putString("Personaje", json)
+            editor.apply()
             startActivity(intent)
         }
 
-        binding.Volver.setOnClickListener{
-            val intent = Intent(this@Ciudad, Ejercicio10::class.java)
-            val json2 = gson.toJson(p)
-            intent.putExtra("Personaje", json2)
-            startActivity(intent)
-        }
+
     }
+
+
+
 }
