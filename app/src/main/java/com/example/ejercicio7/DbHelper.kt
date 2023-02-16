@@ -110,7 +110,6 @@ class DbHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,null
                 + "FOREIGN KEY (" + ID_MOCHILA + ") REFERENCES " + TABLE_MOCHILA + "(" + MOCHILA_ID + "),"
                 + "FOREIGN KEY (" + ID_MONEDERO + ") REFERENCES " + TABLE_MONEDERO + "(" + monedero_id + ")"
                 + ")")
-
     }
 
 
@@ -119,6 +118,7 @@ class DbHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,null
         db.execSQL(CREATE_TABLE_MOCHILA)
         db.execSQL(CREATE_TABLE_MONEDERO)
         db.execSQL(CREATE_TABLE_PERSONAJE)
+        db.execSQL(CREATE_TABLE_OBJETOS_Y_MOCHILA)
 
     }
 
@@ -127,6 +127,7 @@ class DbHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,null
         db.execSQL("DROP TABLE IF EXISTS $TABLE_MOCHILA")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_MONEDERO")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_PERSONAJE")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_OBJETOS_Y_MOCHILA")
         onCreate(db)
 
     }

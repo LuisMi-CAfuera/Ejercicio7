@@ -19,12 +19,13 @@ class Ciudad : AppCompatActivity() {
         val gson = Gson()
         var json = shared.getString("Personaje", "")
         val p = gson.fromJson(json, Personaje::class.java)
-        var cont = intent.getIntExtra("cont", 0)
+        var cont = 0
+        cont += intent.getIntExtra("cont", 0)
         var intent = Intent(this@Ciudad, Ciudad::class.java)
 
 
         if(cont > 0){
-            binding.Contador.text = "LLevas "+cont+" batallas ganadas \n necesitas 5 para ganar"
+            binding.Contador.text = "LLevas "+cont+"/5 batallas ganadas \n necesitas 5 para ganar"
         }
 
 
@@ -35,7 +36,7 @@ class Ciudad : AppCompatActivity() {
             when(aleatorio){
                 1 -> intent = Intent(this@Ciudad, ObjetoCiudad::class.java)
                 2 -> intent = Intent(this@Ciudad, EnemigoCiudad::class.java)
-                3 -> intent = Intent(this@Ciudad, EnemigoCiudad::class.java)
+                3 -> intent = Intent(this@Ciudad, MercaderCiudad::class.java)
             }
 
             if(al2 == 1){

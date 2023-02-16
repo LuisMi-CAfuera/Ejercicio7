@@ -23,7 +23,7 @@ class Ejercicio10 : AppCompatActivity() {
 
         binding.Valle.setImageResource(R.drawable.valle)
         binding.PesoMochila.isEnabled = false
-
+        println(p.mochila.toString())
 
 
         if(p.pesoMochila < 200){

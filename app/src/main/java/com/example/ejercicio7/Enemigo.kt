@@ -64,15 +64,13 @@ class Enemigo : AppCompatActivity() {
             } else if (p.vida <= 0) {
                 val intent = Intent(this@Enemigo, Muerte::class.java)
                 startActivity(intent)
-            } else {
-
-                if (tipo == "Normal") {
-                    p.vida -= 20 / p.defensa
-                    binding.cantidadHP2.text = "200/${p.vida}"
-                } else if (tipo == "Boss") {
-                    p.vida -= 30 / p.defensa
-                    binding.cantidadHP2.text = "200/${p.vida}"
-                }
+            }
+            if (tipo == "Normal") {
+                p.vida -= 20 / p.defensa
+                binding.cantidadHP2.text = "200/${p.vida}"
+            } else if (tipo == "Boss") {
+                p.vida -= 30 / p.defensa
+                binding.cantidadHP2.text = "200/${p.vida}"
             }
         }
 
@@ -152,13 +150,24 @@ class Enemigo : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     fun objetos(personaje: Personaje){
-        if(personaje.vida < 200 ){
-            personaje.mochila.remove(Objetos("Pocion", 2, 50, 100))
+        if(personaje.vida < 200 && personaje.mochila.contains(Objetos("Pocion", 2, 50, 100))){
+            personaje.mochila.removeAt(encontrarObjeto(personaje.mochila, "Pocion"))
             personaje.vida += 20
             binding.cantidadHP2.text = "200/${personaje.vida}"
         }else{
             binding.turno.text = "No tienes pociones o no puedes usarlas"
         }
+    }
+
+    fun encontrarObjeto(objetos : ArrayList<Objetos>, nombre : String) : Int {
+        var cont = 0
+        for (i in objetos){
+            if (i.nombre == nombre){
+                return cont
+            }
+            cont ++
+        }
+        return -1
     }
 
 }

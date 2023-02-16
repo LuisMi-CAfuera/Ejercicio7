@@ -15,7 +15,7 @@ class Objetos{
     constructor()
 
     override fun toString(): String {
-        return "Objetos(peso=$peso, valor=$valor, vida=$vida)"
+        return "Objetos(nombre='$nombre', peso=$peso, valor=$valor, vida=$vida)"
     }
 
 

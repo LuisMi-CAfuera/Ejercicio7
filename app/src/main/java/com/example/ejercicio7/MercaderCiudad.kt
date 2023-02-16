@@ -14,22 +14,28 @@ import com.google.gson.Gson
 
 class MercaderCiudad : AppCompatActivity() {
     private lateinit var binding: ActivityMercaderBinding
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMercaderBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val shared = getSharedPreferences("Personaje", Context.MODE_PRIVATE)
+        val shared = getSharedPreferences("Personaje", MODE_PRIVATE)
         val gson = Gson()
         var json = shared.getString("Personaje", "")
         val p = gson.fromJson(json, Personaje::class.java)
+        val ArrayObjetos: ArrayList<Objetos> = ArrayList()
+        ArrayObjetos.add(Objetos("Espada", 2, 120, 200))
+        ArrayObjetos.add(Objetos("Armadura", 1, 100, 150))
+        ArrayObjetos.add(Objetos("Escudo", 1, 100, 150))
+        ArrayObjetos.add(Objetos("Pocion", 0, 50, 50))
         p.monedero["1"] = 100
         p.monedero["10"] = 100
         p.monedero["20"] = 100
         p.monedero["50"] = 100
         p.monedero["100"] = 100
-        binding.Mercader.setImageResource(R.drawable.mercader1)
-
+        binding.Mercader.setImageResource(R.drawable.mercader)
+        println(p.mochila.toString())
 
 
         binding.Comerciar.setOnClickListener {
@@ -50,7 +56,7 @@ class MercaderCiudad : AppCompatActivity() {
             binding.CantidadYPrecio.visibility = View.VISIBLE
             binding.CantidadYPrecio.text = "Cantidad: 0 Precio: 0"
             binding.ComprarOVender.visibility = View.VISIBLE
-            comprar(binding,p)
+            comprar(p)
         }
 
         binding.Vender.setOnClickListener {
@@ -62,7 +68,7 @@ class MercaderCiudad : AppCompatActivity() {
             binding.menos.visibility = View.VISIBLE
             binding.CantidadYPrecio.visibility = View.VISIBLE
             binding.CantidadYPrecio.text = "Cantidad: 0 Precio: 0"
-            vender(binding,p)
+            vender(p)
         }
 
 
@@ -93,247 +99,29 @@ class MercaderCiudad : AppCompatActivity() {
         }
 
 
-    }
-    fun comprar(binding: ActivityMercaderBinding,p : Personaje){
-        val espada = Objetos("Espada", 14, 125, 200)
-        val escudo = Objetos("Escudo", 10, 100, 250)
-        val armadura = Objetos("Armadura", 20, 150, 300)
-        val pocion = Objetos("Pocion", 2, 50, 100)
-        var cantidad = 0
-        var pago = 0
-        var pago2 = 0
-        var aux = 0
-        var ido = ""
-        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            @SuppressLint("SetTextI18n")
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                when (binding.spinner.selectedItem.toString()) {
-                    " " -> {
-                        cantidad = 0
-                        binding.Mercader.setImageResource(R.drawable.mercader)
-                        binding.CantidadYPrecio.text = "Cantidad: $cantidad Precio: 0  Peso: 0"
-                    }
-
-                    "Espada" -> {
-                        binding.Mercader.setImageResource(R.drawable.espada)
-                        cantidad = 0
-                        ido = "Espada"
-                        binding.mas.setOnClickListener {
-                            cantidad++
-                            pago = cantidad * espada.valor
-                            if(p.pesoMochila - (espada.peso * cantidad) <= 0){
-                                binding.CantidadYPrecio.text = "No puedes comprar tanto"
-                                binding.ComprarOVender.isEnabled = false
-                            }
-                            binding.CantidadYPrecio.text =
-                                "Cantidad: $cantidad Precio: ${cantidad * espada.valor} Peso: ${cantidad * espada.peso}"
-                        }
-                        binding.menos.setOnClickListener {
-                            if (cantidad > 0) {
-                                cantidad--
-                                pago = cantidad * espada.valor
-                                binding.CantidadYPrecio.text =
-                                    "Cantidad: $cantidad Precio: ${cantidad * espada.valor} Peso: ${cantidad * espada.peso}"
-                            }
-                            binding.ComprarOVender.isEnabled = true
-                        }
-
-                    }
-
-                    "Escudo" -> {
-                        binding.Mercader.setImageResource(R.drawable.escudo)
-                        cantidad = 0
-                        ido = "Escudo"
-                        binding.mas.setOnClickListener {
-                            cantidad++
-                            pago = cantidad * escudo.valor
-                            if(p.pesoMochila - (escudo.peso * cantidad) <= 0){
-                                binding.CantidadYPrecio.text = "No puedes comprar tanto"
-                                binding.ComprarOVender.isEnabled = false
-                            }
-                            binding.CantidadYPrecio.text =
-                                "Cantidad: $cantidad Precio: ${cantidad * escudo.valor} Peso: ${cantidad * escudo.peso}"
-                        }
-                        binding.menos.setOnClickListener {
-                            if (cantidad > 0) {
-                                cantidad--
-                                pago = cantidad * escudo.valor
-                                binding.CantidadYPrecio.text =
-                                    "Cantidad: $cantidad Precio: ${cantidad * escudo.valor} Peso : ${cantidad * escudo.peso}"
-                            }
-                            binding.ComprarOVender.isEnabled = true
-                        }
-
-
-                    }
-
-                    "Armadura" -> {
-                        binding.Mercader.setImageResource(R.drawable.armadura)
-                        cantidad = 0
-                        ido = "Armadura"
-                        binding.mas.setOnClickListener {
-                            cantidad++
-                            pago = cantidad * armadura.valor
-                            if(p.pesoMochila - (armadura.peso * cantidad) <= 0){
-                                binding.CantidadYPrecio.text = "No puedes comprar tanto"
-                                binding.ComprarOVender.isEnabled = false
-                            }
-                            binding.CantidadYPrecio.text =
-                                "Cantidad: $cantidad Precio: ${cantidad * armadura.valor} Peso: ${cantidad * armadura.peso}"
-                        }
-                        binding.menos.setOnClickListener {
-                            if (cantidad > 0) {
-                                cantidad--
-                                pago = cantidad * armadura.valor
-                                binding.CantidadYPrecio.text =
-                                    "Cantidad: $cantidad Precio: ${cantidad * armadura.valor} Peso: ${cantidad * armadura.peso}"
-                            }
-                            binding.ComprarOVender.isEnabled = true
-                        }
-
-                    }
-
-                    "Pocion de HP" -> {
-                        binding.Mercader.setImageResource(R.drawable.pocion)
-                        cantidad = 0
-                        ido = "Pocion de HP"
-                        binding.mas.setOnClickListener {
-                            cantidad++
-                            pago = cantidad * pocion.valor
-                            if(p.pesoMochila - (pocion.peso * cantidad) <= 0){
-                                binding.CantidadYPrecio.text = "No puedes comprar tanto"
-                                binding.ComprarOVender.isEnabled = false
-                            }
-                            binding.CantidadYPrecio.text =
-                                "Cantidad: $cantidad Precio: ${cantidad * pocion.valor} Peso: ${cantidad * pocion.peso}"
-                        }
-                        binding.menos.setOnClickListener {
-                            if (cantidad > 0) {
-                                cantidad--
-                                pago = cantidad * pocion.valor
-                                binding.CantidadYPrecio.text =
-                                    "Cantidad: $cantidad Precio: ${cantidad * pocion.valor} Peso: ${cantidad * pocion.peso}"
-                            }
-                            binding.ComprarOVender.isEnabled = true
-                        }
-
-                    }
-                }
-
-                binding.ComprarOVender.setOnClickListener{
-                    pago2 = pago
-                    aux = pago / 100
-                    if(aux > 0){
-                        pago -= 100 * aux
-                        p.monedero["100"] = p.monedero["100"]!! - aux
-                    }
-                    aux = pago / 50
-                    if(aux > 0){
-                        pago -= 50 * aux
-                        p.monedero["50"] = p.monedero["50"]!! - aux
-                    }
-                    aux = pago / 20
-                    if(aux > 0){
-                        pago -= 20 * aux
-                        p.monedero["20"] = p.monedero["20"]!! - aux
-                    }
-                    aux = pago / 10
-                    if(aux > 0){
-                        pago -= 10 * aux
-                        p.monedero["10"] = p.monedero["10"]!! - aux
-                    }
-                    aux = pago / 1
-                    if(aux > 0){
-                        pago -= 1 * aux
-                        p.monedero["1"] = p.monedero["1"]!! - aux
-                    }
-
-
-
-                    binding.Mercader.setImageResource(R.drawable.mercader)
-                    binding.spinner.visibility = View.INVISIBLE
-                    binding.ComprarOVender.visibility = View.INVISIBLE
-                    binding.mas.visibility = View.INVISIBLE
-                    binding.menos.visibility = View.INVISIBLE
-                    binding.Comerciar.visibility = View.VISIBLE
-                    binding.Volver.visibility = View.VISIBLE
-
-                    when(ido){
-                        "Espada" -> {
-                            //Bucle para añadir la cantidad de espadas que se quiera
-                            for(i in 0 until cantidad){
-                                p.mochila.add(espada)
-                            }
-                            p.pesoMochila -= espada.peso * cantidad
-                        }
-                        "Escudo" -> {
-                            //Bucle para añadir la cantidad de escudos que se quiera
-                            for(i in 0 until cantidad){
-                                p.mochila.add(escudo)
-                            }
-                            p.pesoMochila -= escudo.peso * cantidad
-                        }
-                        "Armadura" -> {
-                            //Bucle para añadir la cantidad de armaduras que se quiera
-                            for(i in 0 until cantidad){
-                                p.mochila.add(armadura)
-                            }
-                            p.pesoMochila -= armadura.peso * cantidad
-                        }
-                        "Pocion de HP" -> {
-                            //Bucle para añadir la cantidad de pociones que se quiera
-                            for(i in 0 until cantidad){
-                                p.mochila.add(pocion)
-                            }
-                            p.pesoMochila -= pocion.peso * cantidad
-                        }
-                    }
-                    binding.CantidadYPrecio.text = "Gastaste $pago2 \n" +
-                            "Te quedan ${p.monedero["100"]} billetes de 100,\n" +
-                            "${p.monedero["50"]} billetes de 50,\n " +
-                            "${p.monedero["20"]} billetes de 20,\n " +
-                            "${p.monedero["10"]} billetes de 10 y\n " +
-                            "${p.monedero["1"]} monedas de 1\n" +
-                            "Peso de la mochila: ${p.pesoMochila}"
-                }
-
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-        }
+//        val adapter = ArrayAdapter(
+//            this@Mercader,
+//            android.R.layout.simple_spinner_item,
+//            objetos.keys.toList()
+//        )
+//        binding.spinner.adapter = adapter
 
 
     }
 
     @SuppressLint("SetTextI18n")
-    fun vender(binding: ActivityMercaderBinding, p:Personaje) {
-
-        val espada = Objetos("Espada", 14, 125, 200)
-        val escudo = Objetos("Escudo", 10, 100, 250)
-        val armadura = Objetos("Armadura", 20, 150, 300)
-        val pocion = Objetos("Pocion", 2, 50, 100)
-
+    fun comprar(p: Personaje) {
+        val espada = Objetos("Espada", 2, 120, 200)
+        val armadura = Objetos("Armadura", 1, 100, 150)
+        val escudo = Objetos("Escudo", 1, 100, 150)
+        val pocion = Objetos("Pocion", 0, 50, 50)
         var cantidad = 0
-        var pago = 0
-        var aux = 0
-        var ido = ""
+        var precio = 0
 
-        val lista = ArrayList<String>()
-        val objetos = HashMap<String, Int>()
 
-        for (i in p.mochila) {
-            lista.add(i.nombre)
-        }
-
-        if (lista.isEmpty()) {
-            binding.CantidadYPrecio.text = "No tienes objetos en tu mochila"
+        if (p.pesoMochila <= 0) {
+            binding.Mercader.setImageResource(R.drawable.mercader)
+            binding.CantidadYPrecio.text = "No tienes espacio en la mochila"
             binding.Comerciar.visibility = View.VISIBLE
             binding.Comprar.visibility = View.INVISIBLE
             binding.Vender.visibility = View.INVISIBLE
@@ -342,23 +130,225 @@ class MercaderCiudad : AppCompatActivity() {
             binding.spinner.visibility = View.INVISIBLE
             binding.mas.visibility = View.INVISIBLE
             binding.menos.visibility = View.INVISIBLE
-
+            binding.ComprarOVender.visibility = View.INVISIBLE
         } else {
-            binding.Mercader.setImageResource(R.drawable.cars1)
-            binding.ComprarOVender.visibility = View.VISIBLE
-            binding.ComprarOVender.text = "Vender"
-            for (i in lista) {
-                if (objetos.containsKey(i)) {
-                    objetos.put(i, objetos[i]!! + 1)
-                } else {
-                    objetos.put(i, 1)
+            binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                @SuppressLint("SetTextI18n")
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    when (binding.spinner.selectedItem.toString()) {
+                        " " -> {
+                            binding.Mercader.setImageResource(R.drawable.mercader)
+                            binding.CantidadYPrecio.text = "Cantidad: 0 Precio: 0"
+                        }
+                        "Espada" -> {
+                            precio = 0
+                            cantidad = 0
+                            binding.CantidadYPrecio.text = "Cantidad: 0 Precio: 0"
+                            binding.Mercader.setImageResource(R.drawable.espada)
+                            binding.mas.setOnClickListener {
+                                if (p.pesoMochila > espada.peso * cantidad) {
+                                    p.mochila.add(espada)
+                                    cantidad++
+                                    precio = espada.valor * cantidad
+                                    binding.CantidadYPrecio.text =
+                                        "Cantidad: $cantidad Precio: $precio Peso : ${espada.peso * cantidad}"
+                                }
+                            }
+                            binding.menos.setOnClickListener {
+                                if (cantidad > 0) {
+                                    p.mochila.removeAt(encontrarObjeto(p.mochila,"Espada"))
+                                    cantidad--
+                                    precio = espada.valor * cantidad
+                                    binding.CantidadYPrecio.text =
+                                        "Cantidad: $cantidad Precio: $precio Peso : ${espada.peso * cantidad}"
+                                }
+                            }
+                        }
+                        "Armadura" -> {
+                            precio = 0
+                            cantidad = 0
+                            binding.CantidadYPrecio.text = "Cantidad: 0 Precio: 0"
+                            binding.Mercader.setImageResource(R.drawable.armadura)
+                            binding.mas.setOnClickListener {
+                                if (p.pesoMochila > armadura.peso * cantidad) {
+                                    p.mochila.add(armadura)
+                                    cantidad++
+                                    precio = armadura.valor * cantidad
+                                    binding.CantidadYPrecio.text =
+                                        "Cantidad: $cantidad Precio: $precio Peso : ${armadura.peso * cantidad}"
+                                }
+                            }
+                            binding.menos.setOnClickListener {
+                                if (cantidad > 0) {
+                                    p.mochila.removeAt(encontrarObjeto(p.mochila,"Armadura"))
+                                    cantidad--
+                                    precio = armadura.valor * cantidad
+                                    binding.CantidadYPrecio.text =
+                                        "Cantidad: $cantidad Precio: $precio Peso : ${armadura.peso * cantidad}"
+                                }
+                            }
+                        }
+                        "Escudo" -> {
+                            precio = 0
+                            cantidad = 0
+                            binding.CantidadYPrecio.text = "Cantidad: 0 Precio: 0"
+                            binding.Mercader.setImageResource(R.drawable.escudo)
+                            binding.mas.setOnClickListener {
+                                if (p.pesoMochila > escudo.peso * cantidad) {
+                                    p.mochila.add(escudo)
+                                    cantidad++
+                                    precio = escudo.valor * cantidad
+                                    binding.CantidadYPrecio.text =
+                                        "Cantidad: $cantidad Precio: $precio Peso : ${escudo.peso * cantidad}"
+                                }
+                            }
+                            binding.menos.setOnClickListener {
+                                if (cantidad > 0) {
+                                    p.mochila.removeAt(encontrarObjeto(p.mochila,"Escudo"))
+                                    cantidad--
+                                    precio = escudo.valor * cantidad
+                                    binding.CantidadYPrecio.text =
+                                        "Cantidad: $cantidad Precio: $precio Peso : ${escudo.peso * cantidad}"
+                                }
+                            }
+
+                        }
+                        "Pocion" -> {
+                            precio = 0
+                            cantidad = 0
+                            binding.CantidadYPrecio.text = "Cantidad: 0 Precio: 0"
+                            binding.Mercader.setImageResource(R.drawable.pocion)
+                            binding.mas.setOnClickListener {
+                                if (p.pesoMochila > pocion.peso * cantidad) {
+                                    p.mochila.add(pocion)
+                                    cantidad++
+                                    precio = pocion.valor * cantidad
+                                    binding.CantidadYPrecio.text =
+                                        "Cantidad: $cantidad Precio: $precio Peso : ${pocion.peso * cantidad}"
+                                }
+                            }
+                            binding.menos.setOnClickListener {
+                                if (cantidad > 0) {
+                                    p.mochila.removeAt(encontrarObjeto(p.mochila,"Pocion"))
+                                    cantidad--
+                                    precio = pocion.valor * cantidad
+                                    binding.CantidadYPrecio.text =
+                                        "Cantidad: $cantidad Precio: $precio Peso : ${pocion.peso * cantidad}"
+                                }
+                            }
+                        }
+                    }
+                    binding.ComprarOVender.setOnClickListener {
+                        var cociente = 0
+                        val pago2 = precio
+
+                        cociente = precio / 100
+
+                        if (cociente > 0) {
+                            precio -= 100 * cociente
+                            p.monedero["100"] = p.monedero["100"]!! - cociente
+                        }
+
+                        cociente = precio / 50
+
+                        if (cociente > 0) {
+                            precio -= 50 * cociente
+                            p.monedero["50"] = p.monedero["50"]!! - cociente
+                        }
+
+                        cociente = precio / 20
+
+                        if (cociente > 0) {
+                            precio -= 20 * cociente
+                            p.monedero["20"] = p.monedero["20"]!! - cociente
+                        }
+
+                        cociente = precio / 10
+
+                        if (cociente > 0) {
+                            precio -= 10 * cociente
+                            p.monedero["10"] = p.monedero["10"]!! - cociente
+                        }
+
+                        cociente = precio / 1
+
+                        if (cociente > 0) {
+                            precio -= 1 * cociente
+                            p.monedero["1"] = p.monedero["1"]!! - cociente
+                        }
+
+                        binding.Mercader.setImageResource(R.drawable.mercader)
+                        binding.CantidadYPrecio.text =
+                            "Has comprado $cantidad \n ${binding.spinner.selectedItem.toString()} por $pago2"
+                        binding.Comerciar.visibility = View.VISIBLE
+                        binding.Comprar.visibility = View.INVISIBLE
+                        binding.Vender.visibility = View.INVISIBLE
+                        binding.Cancelar.visibility = View.INVISIBLE
+                        binding.Volver.visibility = View.VISIBLE
+                        binding.spinner.visibility = View.INVISIBLE
+                        binding.mas.visibility = View.INVISIBLE
+                        binding.menos.visibility = View.INVISIBLE
+                        binding.ComprarOVender.visibility = View.INVISIBLE
+
+                        println(p.mochila.toString())
+
+                        binding.spinner.setSelection(0)
+
+                    }
                 }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    TODO("Not yet implemented")
+                }
+
             }
 
+        }
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun vender(p: Personaje) {
+        binding.ComprarOVender.text = "Vender"
+        val espada = Objetos("Espada", 2, 120, 200)
+        val armadura = Objetos("Armadura", 1, 100, 150)
+        val escudo = Objetos("Escudo", 1, 100, 150)
+        val pocion = Objetos("Pocion", 0, 50, 50)
+        var precio = 0
+        var cantidad = 0
+        var CantidadObjetos = HashMap<String, Int>()
+
+
+        if (p.mochila.isEmpty()) {
+            binding.CantidadYPrecio.text = "No tienes nada en la mochila"
+            binding.Comerciar.visibility = View.VISIBLE
+            binding.Comprar.visibility = View.INVISIBLE
+            binding.Vender.visibility = View.INVISIBLE
+            binding.Cancelar.visibility = View.INVISIBLE
+            binding.Volver.visibility = View.VISIBLE
+            binding.spinner.visibility = View.INVISIBLE
+            binding.mas.visibility = View.INVISIBLE
+            binding.menos.visibility = View.INVISIBLE
+            binding.ComprarOVender.visibility = View.INVISIBLE
+        } else {
+            binding.ComprarOVender.visibility = View.VISIBLE
+            binding.Mercader.setImageResource(R.drawable.cars1)
+            for (i in p.mochila) {
+                if (CantidadObjetos.containsKey(i.nombre)) {
+                    CantidadObjetos[i.nombre] = CantidadObjetos[i.nombre]!! + 1
+                } else {
+                    CantidadObjetos[i.nombre] = 1
+                }
+            }
             val adapter = ArrayAdapter(
-                this@MercaderCiudad,
+                this,
                 android.R.layout.simple_spinner_item,
-                objetos.keys.toList()
+                CantidadObjetos.keys.toTypedArray()
             )
             binding.spinner.adapter = adapter
 
@@ -371,168 +361,182 @@ class MercaderCiudad : AppCompatActivity() {
                     id: Long
                 ) {
                     when(binding.spinner.selectedItem.toString()){
-                        "Objeto Random"->{
-                            Toast.makeText(this@MercaderCiudad, "No puedes vender este objeto", Toast.LENGTH_SHORT).show()
-                        }
                         "Espada"->{
+                            precio = 0
                             cantidad = 0
-                            ido = "Espada"
+                            binding.CantidadYPrecio.text = "Cantidad: 0 Precio: 0"
                             binding.mas.setOnClickListener {
-                                if(cantidad < objetos["Espada"]!!){
+                                if (CantidadObjetos["Espada"]!! > cantidad) {
+                                    p.mochila.removeAt(encontrarObjeto(p.mochila, "Espada"))
+                                    p.pesoMochila -= espada.peso
                                     cantidad++
-                                    pago = cantidad * espada.valor
+                                    precio = espada.valor * cantidad
                                     binding.CantidadYPrecio.text =
-                                        "Cantidad: $cantidad Precio: ${cantidad * espada.valor} Peso: ${cantidad * espada.peso}"
+                                        "Cantidad: $cantidad Precio: $precio Peso : ${espada.peso * cantidad}"
                                 }
                             }
                             binding.menos.setOnClickListener {
                                 if (cantidad > 0) {
+                                    p.mochila.add(espada)
+                                    p.pesoMochila += espada.peso
                                     cantidad--
-                                    pago = cantidad * espada.valor
+                                    precio = espada.valor * cantidad
                                     binding.CantidadYPrecio.text =
-                                        "Cantidad: $cantidad Precio: ${cantidad * espada.valor} Peso: ${cantidad * espada.peso}"
+                                        "Cantidad: $cantidad Precio: $precio Peso : ${espada.peso * cantidad}"
+                                }
+                            }
+
+                        }
+                        "Armadura"->{
+                            precio = 0
+                            cantidad = 0
+                            binding.CantidadYPrecio.text = "Cantidad: 0 Precio: 0"
+                            binding.mas.setOnClickListener {
+                                if (CantidadObjetos["Armadura"]!! > cantidad) {
+                                    p.mochila.removeAt(encontrarObjeto(p.mochila, "Armadura"))
+                                    p.pesoMochila -= armadura.peso
+                                    cantidad++
+                                    precio = armadura.valor * cantidad
+                                    binding.CantidadYPrecio.text =
+                                        "Cantidad: $cantidad Precio: $precio Peso : ${armadura.peso * cantidad}"
+                                }
+                            }
+                            binding.menos.setOnClickListener {
+                                if (cantidad > 0) {
+                                    p.mochila.add(armadura)
+                                    p.pesoMochila += armadura.peso
+                                    cantidad--
+                                    precio = armadura.valor * cantidad
+                                    binding.CantidadYPrecio.text =
+                                        "Cantidad: $cantidad Precio: $precio Peso : ${armadura.peso * cantidad}"
                                 }
                             }
                         }
                         "Escudo"->{
+                            precio = 0
+                            cantidad = 0
+                            binding.CantidadYPrecio.text = "Cantidad: 0 Precio: 0"
                             binding.mas.setOnClickListener {
-                                if(cantidad < objetos["Escudo"]!!){
+                                if (CantidadObjetos["Escudo"]!! > cantidad) {
+                                    p.mochila.removeAt(encontrarObjeto(p.mochila, "Escudo"))
+                                    p.pesoMochila -= escudo.peso
                                     cantidad++
-                                    pago = cantidad * escudo.valor
+                                    precio = escudo.valor * cantidad
                                     binding.CantidadYPrecio.text =
-                                        "Cantidad: $cantidad Precio: ${cantidad * escudo.valor} Peso: ${cantidad * escudo.peso}"
+                                        "Cantidad: $cantidad Precio: $precio Peso : ${escudo.peso * cantidad}"
                                 }
                             }
                             binding.menos.setOnClickListener {
                                 if (cantidad > 0) {
+                                    p.mochila.add(escudo)
+                                    p.pesoMochila += escudo.peso
                                     cantidad--
-                                    pago = cantidad * escudo.valor
+                                    precio = escudo.valor * cantidad
                                     binding.CantidadYPrecio.text =
-                                        "Cantidad: $cantidad Precio: ${cantidad * escudo.valor} Peso: ${cantidad * escudo.peso}"
-                                }
-                            }
-                        }
-                        "Armadura"->{
-                            binding.mas.setOnClickListener {
-                                if(cantidad < objetos["Armadura"]!!){
-                                    cantidad++
-                                    pago = cantidad * armadura.valor
-                                    binding.CantidadYPrecio.text =
-                                        "Cantidad: $cantidad Precio: ${cantidad * armadura.valor} Peso: ${cantidad * armadura.peso}"
-                                }
-                            }
-                            binding.menos.setOnClickListener {
-                                if (cantidad > 0) {
-                                    cantidad--
-                                    pago = cantidad * armadura.valor
-                                    binding.CantidadYPrecio.text =
-                                        "Cantidad: $cantidad Precio: ${cantidad * armadura.valor} Peso: ${cantidad * armadura.peso}"
+                                        "Cantidad: $cantidad Precio: $precio Peso : ${escudo.peso * cantidad}"
                                 }
                             }
                         }
                         "Pocion"->{
-
+                            precio = 0
+                            cantidad = 0
+                            binding.CantidadYPrecio.text = "Cantidad: 0 Precio: 0"
                             binding.mas.setOnClickListener {
-                                if(cantidad < objetos["Pocion"]!!){
+                                if (CantidadObjetos["Pocion"]!! > cantidad) {
+                                    p.mochila.removeAt(encontrarObjeto(p.mochila, "Pocion"))
+                                    p.pesoMochila -= pocion.peso
                                     cantidad++
-                                    pago = cantidad * pocion.valor
+                                    precio = pocion.valor * cantidad
                                     binding.CantidadYPrecio.text =
-                                        "Cantidad: $cantidad Precio: ${cantidad * pocion.valor} Peso: ${cantidad * pocion.peso}"
+                                        "Cantidad: $cantidad Precio: $precio Peso : ${pocion.peso * cantidad}"
                                 }
                             }
                             binding.menos.setOnClickListener {
                                 if (cantidad > 0) {
+                                    p.mochila.add(pocion)
+                                    p.pesoMochila += pocion.peso
                                     cantidad--
-                                    pago = cantidad * pocion.valor
+                                    precio = pocion.valor * cantidad
                                     binding.CantidadYPrecio.text =
-                                        "Cantidad: $cantidad Precio: ${cantidad * pocion.valor} Peso: ${cantidad * pocion.peso}"
+                                        "Cantidad: $cantidad Precio: $precio Peso : ${pocion.peso * cantidad}"
                                 }
                             }
+                        }
+                        "Objeto Random"->{
+                            precio = 0
+                            cantidad = 0
+                            binding.CantidadYPrecio.text = "No puedes vender este objeto"
+
                         }
                     }
 
                     binding.ComprarOVender.setOnClickListener{
-                        val pago2 = pago
-                        aux = pago / 100
-                        if(aux > 0){
-                            pago -= 100 * aux
-                            p.monedero["100"] = p.monedero["100"]!! + aux
+                        var cociente = 0
+                        var precio2 = precio
+
+                        cociente = precio / 100
+                        if (cociente > 0) {
+                            precio -= 100 * cociente
+                            p.monedero["100"] = p.monedero["100"]!! - cociente
                         }
-                        aux = pago / 50
-                        if(aux > 0){
-                            pago -= 50 * aux
-                            p.monedero["50"] = p.monedero["50"]!! + aux
+                        cociente = precio / 50
+                        if (cociente > 0) {
+                            precio -= 50 * cociente
+                            p.monedero["50"] = p.monedero["50"]!! - cociente
                         }
-                        aux = pago / 20
-                        if(aux > 0){
-                            pago -= 20 * aux
-                            p.monedero["20"] = p.monedero["20"]!! + aux
+                        cociente = precio / 20
+                        if (cociente > 0) {
+                            precio -= 20 * cociente
+                            p.monedero["20"] = p.monedero["20"]!! - cociente
                         }
-                        aux = pago / 10
-                        if(aux > 0){
-                            pago -= 10 * aux
-                            p.monedero["10"] = p.monedero["10"]!! + aux
+                        cociente = precio / 10
+                        if (cociente > 0) {
+                            precio -= 10 * cociente
+                            p.monedero["10"] = p.monedero["10"]!! - cociente
                         }
-                        aux = pago / 1
-                        if(aux > 0){
-                            pago -= 1 * aux
-                            p.monedero["1"] = p.monedero["1"]!! + aux
+                        cociente = precio / 1
+                        if (cociente > 0) {
+                            precio -= 1 * cociente
+                            p.monedero["1"] = p.monedero["1"]!! - cociente
                         }
+
                         binding.Mercader.setImageResource(R.drawable.mercader)
+                        binding.CantidadYPrecio.text =
+                            "Has vendido $cantidad \n ${binding.spinner.selectedItem.toString()} por $precio2"
+                        binding.Comerciar.visibility = View.VISIBLE
+                        binding.Comprar.visibility = View.INVISIBLE
+                        binding.Vender.visibility = View.INVISIBLE
+                        binding.Cancelar.visibility = View.INVISIBLE
+                        binding.Volver.visibility = View.VISIBLE
                         binding.spinner.visibility = View.INVISIBLE
-                        binding.ComprarOVender.visibility = View.INVISIBLE
                         binding.mas.visibility = View.INVISIBLE
                         binding.menos.visibility = View.INVISIBLE
-                        binding.Comerciar.visibility = View.VISIBLE
-                        binding.Volver.visibility = View.VISIBLE
+                        binding.ComprarOVender.visibility = View.INVISIBLE
 
-                        when(ido){
-                            "Espada"->{
-                                for(i in 0 until cantidad){
-                                    p.mochila.remove(espada)
-                                    objetos["Espada"] = objetos["Espada"]!! - 1
-                                    p.pesoMochila -= espada.peso
-                                }
-                            }
-                            "Escudo"->{
-                                for(i in 0 until cantidad){
-                                    p.mochila.remove(escudo)
-                                    objetos["Escudo"] = objetos["Escudo"]!! - 1
-                                    p.pesoMochila -= escudo.peso
-                                }
-                            }
-                            "Armadura"->{
-                                for(i in 0 until cantidad){
-                                    p.mochila.remove(armadura)
-                                    objetos["Armadura"] = objetos["Armadura"]!! - 1
-                                    p.pesoMochila -= armadura.peso
-                                }
-                            }
-                            "Pocion"->{
-                                for(i in 0 until cantidad){
-                                    p.mochila.remove(pocion)
-                                    objetos["Pocion"] = objetos["Pocion"]!! - 1
-                                    p.pesoMochila -= pocion.peso
-                                }
-                            }
-                        }
-                        binding.CantidadYPrecio.text = "Ganaste $pago2 \n" +
-                                "Ahora tienes ${p.monedero["100"]} billetes de 100,\n" +
-                                "${p.monedero["50"]} billetes de 50,\n " +
-                                "${p.monedero["20"]} billetes de 20,\n " +
-                                "${p.monedero["10"]} billetes de 10 y\n " +
-                                "${p.monedero["1"]} monedas de 1\n" +
-                                "Peso de la mochila: ${p.pesoMochila}"
+                        println(p.mochila.toString())
                     }
 
+
                 }
+
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     TODO("Not yet implemented")
                 }
             }
-
         }
     }
+
+    fun encontrarObjeto(objetos : ArrayList<Objetos>, nombre : String) : Int {
+        var cont = 0
+        for (i in objetos){
+            if (i.nombre == nombre){
+                return cont
+            }
+            cont ++
+        }
+        return -1
+    }
+
 
 }
 
